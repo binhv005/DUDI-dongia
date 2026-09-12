@@ -83,7 +83,7 @@ export function HeroSection({ onNavigate }) {
 
 const styles = {
   heroWrapper: {
-    backgroundImage: `linear-gradient(90deg, #07080D 0%, rgba(7, 8, 13, 0.94) 46%, rgba(7, 8, 13, 0.4) 76%, transparent 100%), url('/8c8b2c77-0cf2-44e4-98c1-9dcc83b493cd.png')`,
+    backgroundImage: `linear-gradient(90deg, #07080D 0%, rgba(7, 8, 13, 0.94) 46%, rgba(7, 8, 13, 0.4) 76%, transparent 100%), url('/hero-bg.webp')`,
     backgroundPosition: 'right center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',

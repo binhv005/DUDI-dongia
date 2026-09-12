@@ -317,7 +317,7 @@ export function ProcessSection() {
 
 const styles = {
   sectionWrapper: {
-    backgroundImage: `url('/9d7bf827-3798-41f6-a16b-f59fc2480bb1.png')`,
+    backgroundImage: `url('/process-bg.webp')`,
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',

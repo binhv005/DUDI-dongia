@@ -50,7 +50,7 @@ export function CaseSection() {
               <div className="case-header-left">
                 <div className="card-mascot-wrap">
                   <img
-                    src="/robot-head.png"
+                    src="/robot-head.webp"
                     alt="DUDI Tech Mascot"
                     className="card-robot-head-img"
                   />

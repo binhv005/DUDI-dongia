@@ -1,10 +1,10 @@
 import React from 'react';
 
 const mascotSources = {
-  hero: "/mascot-dudi.png",
-  analyzer: "/mascot-dudi.png",
-  process: "/mascot-dudi.png",
-  cta: "/mascot-dudi.png"
+  hero: "/robot-head.webp",
+  analyzer: "/robot-head.webp",
+  process: "/robot-head.webp",
+  cta: "/robot-head.webp"
 };
 
 export function Mascot({ type = "hero", alt = "Mascot DUDI Kỹ thuật viên", className = "", style = {} }) {

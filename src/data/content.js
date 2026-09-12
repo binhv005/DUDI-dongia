@@ -6,7 +6,7 @@ export const audiencesData = [
     description: "Cần bổ sung nguồn lực kỹ thuật tức thì để đáp ứng khối lượng backlog dồn dập từ nhiều dự án khách hàng cùng lúc mà không cần mở rộng đội ngũ nội bộ cố định.",
     recommendedModel: "Theo giờ hoặc theo sprint dự án",
     icon: "agency",
-    image: "/images/audience-agency.jpg"
+    image: "/images/audience-agency.webp"
   },
   {
     id: "enterprise",
@@ -15,7 +15,7 @@ export const audiencesData = [
     description: "Có backlog tính năng, nâng cấp và bảo trì biến động liên tục theo thực tế kinh doanh. Cần đội ngũ kỹ thuật triển khai chuẩn chỉnh, minh bạch chi phí theo giờ thực tế.",
     recommendedModel: "Theo giờ và timesheet thực tế",
     icon: "enterprise",
-    image: "/images/audience-enterprise.jpg"
+    image: "/images/audience-enterprise.webp"
   },
   {
     id: "whitelabel",
@@ -24,7 +24,7 @@ export const audiencesData = [
     description: "Cần một đối tác kỹ thuật tin cậy đứng phía sau thực hiện toàn diện sản phẩm dưới thương hiệu riêng của bạn, bảo mật tuyệt đối và bàn giao trọn vẹn tài sản mã nguồn.",
     recommendedModel: "Theo nhóm hoặc trọn gói backlog",
     icon: "whitelabel",
-    image: "/images/audience-whitelabel.jpg"
+    image: "/images/audience-whitelabel.webp"
   }
 ];
 

@@ -52,7 +52,7 @@ const styles = {
   box: {
     width: '100%',
     minHeight: '380px',
-    backgroundImage: `linear-gradient(180deg, rgba(7, 9, 15, 0.5) 0%, rgba(7, 9, 15, 0.88) 100%), url('/e8036c74-9f7d-44fa-8722-aac576c55699.png')`,
+    backgroundImage: `linear-gradient(180deg, rgba(7, 9, 15, 0.5) 0%, rgba(7, 9, 15, 0.88) 100%), url('/cta-bg.webp')`,
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',

@@ -70,7 +70,7 @@ export function ProblemSection() {
             <div className="center-robot-head">
               <div className="robot-glow-back"></div>
               <img
-                src="/robot-head.png"
+                src="/robot-head.webp"
                 alt="DUDI Tech Mascot Head"
                 className="robot-avatar-img"
               />
