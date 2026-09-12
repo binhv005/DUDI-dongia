@@ -9,7 +9,7 @@ export function Footer() {
   return (
     <footer id="s13-footer" className="section-wrapper footer-section" style={styles.footerWrapper}>
       <div className="section-container" style={styles.container}>
-        <div style={styles.topGrid}>
+        <div className="footer-top-grid">
           {/* Left Column: Company Info */}
           <div style={styles.leftCol}>
             <div style={styles.brandRow}>
@@ -103,7 +103,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div style={styles.bottomRow}>
+        <div className="footer-bottom-row">
           <div style={styles.copyright}>
             Copyright © 2026 DUDI Software. All rights reserved.
           </div>
@@ -117,6 +117,46 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .footer-top-grid {
+          display: grid;
+          grid-template-columns: 1.4fr 1.1fr 1fr;
+          gap: 40px;
+          align-items: flex-start;
+          width: 100%;
+        }
+
+        .footer-bottom-row {
+          display: flex;
+          justifyContent: space-between;
+          align-items: center;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          padding-top: 18px;
+          font-size: 0.8rem;
+          color: #64748B;
+          width: 100%;
+        }
+
+        @media (max-width: 900px) {
+          .footer-section {
+            height: auto !important;
+            min-height: auto !important;
+            padding: 40px 18px 24px !important;
+          }
+          .footer-top-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+          .footer-bottom-row {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+            padding-top: 14px;
+            margin-top: 20px;
+          }
+        }
+      `}} />
     </footer>
   );
 }
@@ -135,12 +175,6 @@ const styles = {
     justifyContent: 'space-between',
     padding: '24px 0 16px 0',
     height: '100%'
-  },
-  topGrid: {
-    display: 'grid',
-    gridTemplateColumns: '1.4fr 1.1fr 1fr',
-    gap: '40px',
-    alignItems: 'flex-start'
   },
   leftCol: {
     display: 'flex',
@@ -250,15 +284,6 @@ const styles = {
     fontWeight: 600,
     cursor: 'pointer',
     transition: 'all 0.2s ease'
-  },
-  bottomRow: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-    paddingTop: '18px',
-    fontSize: '0.8rem',
-    color: '#64748B'
   },
   copyright: {
     color: '#64748B'

@@ -370,6 +370,23 @@ export function LimitationSection() {
             padding: 10px;
           }
         }
+
+        @media (max-width: 520px) {
+          .tech-orbital-dial {
+            transform: scale(0.82);
+            margin: -20px auto;
+          }
+          .arc-part-row {
+            padding: 8px 10px;
+            gap: 10px;
+          }
+          .part-prefix {
+            min-width: 48px;
+          }
+          .part-code {
+            font-size: 0.8rem;
+          }
+        }
       `}} />
     </SectionWrapper>
   );

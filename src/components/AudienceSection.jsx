@@ -38,7 +38,7 @@ export function AudienceSection() {
         <p className="section-desc">Lựa chọn giải pháp kỹ thuật phù hợp với mô hình tổ chức và khối lượng công việc hiện tại của bạn.</p>
       </div>
 
-      <div style={styles.grid}>
+      <div className="audience-grid">
         {audiencesData.map((item) => {
           const isSelected = selectedAudience === item.id;
           const isHovered = hoveredCard === item.id;
@@ -117,17 +117,28 @@ export function AudienceSection() {
           );
         })}
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .audience-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-top: 0.4rem;
+          width: 100%;
+        }
+
+        @media (max-width: 900px) {
+          .audience-grid {
+            grid-template-columns: 1fr;
+            gap: 14px;
+          }
+        }
+      `}} />
     </SectionWrapper>
   );
 }
 
 const styles = {
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '14px',
-    marginTop: '0.2rem'
-  },
   card: {
     borderRadius: 'var(--radius-lg)',
     border: '1px solid',

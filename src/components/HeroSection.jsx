@@ -5,7 +5,7 @@ import { companyDetails } from '../data/navigation';
 export function HeroSection({ onNavigate }) {
   return (
     <SectionWrapper id="s02-hero" className="hero-section" style={styles.heroWrapper}>
-      <div style={styles.grid}>
+      <div className="hero-grid">
         <div style={styles.content}>
           <div className="section-tag" style={{ background: 'rgba(229, 46, 46, 0.15)', borderColor: 'rgba(229, 46, 46, 0.5)' }}>
             <span className="section-tag-dot"></span> DUDI Software Solutions
@@ -38,34 +38,62 @@ export function HeroSection({ onNavigate }) {
           </div>
         </div>
 
-        {/* Right side spacer for 3D astronaut mascot background */}
-        <div style={styles.visualSpacer} />
+        {/* Right side spacer for 3D astronaut mascot background on desktop */}
+        <div className="hero-visual-spacer" />
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 30px;
+          align-items: center;
+          width: 100%;
+          min-height: 80%;
+        }
+
+        .hero-visual-spacer {
+          min-height: 340px;
+        }
+
+        @media (max-width: 960px) {
+          .hero-section {
+            background-image: radial-gradient(circle at 85% 15%, rgba(229, 46, 46, 0.18) 0%, transparent 55%), linear-gradient(180deg, #07080D 0%, #0B0E17 100%) !important;
+            background-size: cover !important;
+            background-position: center center !important;
+          }
+          .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          .hero-visual-spacer {
+            display: none;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-section .btn {
+            width: 100%;
+          }
+        }
+      `}} />
     </SectionWrapper>
   );
 }
 
 const styles = {
   heroWrapper: {
-    backgroundImage: `linear-gradient(90deg, #07080D 0%, rgba(7, 8, 13, 0.94) 46%, rgba(7, 8, 13, 0.3) 76%, transparent 100%), url('/8c8b2c77-0cf2-44e4-98c1-9dcc83b493cd.png')`,
+    backgroundImage: `linear-gradient(90deg, #07080D 0%, rgba(7, 8, 13, 0.94) 46%, rgba(7, 8, 13, 0.4) 76%, transparent 100%), url('/8c8b2c77-0cf2-44e4-98c1-9dcc83b493cd.png')`,
     backgroundPosition: 'right center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundColor: '#07080D'
   },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: '1.2fr 0.8fr',
-    gap: '30px',
-    alignItems: 'center',
-    width: '100%',
-    minHeight: '80%'
-  },
   content: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: '1rem',
+    gap: '0.85rem',
     zIndex: 2,
     maxWidth: '640px'
   },
@@ -87,7 +115,7 @@ const styles = {
   },
   titleScript: {
     fontFamily: 'var(--font-script)',
-    fontSize: 'clamp(3.4rem, 5.8vw, 5.2rem)',
+    fontSize: 'clamp(3.2rem, 5.5vw, 5.2rem)',
     fontWeight: 700,
     color: '#FFFFFF',
     display: 'block',
@@ -98,7 +126,7 @@ const styles = {
   },
   titleSuffix: {
     fontFamily: 'var(--font-sans)',
-    fontSize: 'clamp(1.5rem, 2.6vw, 2.3rem)',
+    fontSize: 'clamp(1.4rem, 2.4vw, 2.3rem)',
     fontWeight: 900,
     letterSpacing: '-0.02em',
     textTransform: 'uppercase',
@@ -108,7 +136,7 @@ const styles = {
     textShadow: '0 2px 8px rgba(0,0,0,0.6)'
   },
   subheading: {
-    fontSize: 'clamp(0.95rem, 1.1vw, 1.05rem)',
+    fontSize: 'clamp(0.92rem, 1.05vw, 1.05rem)',
     color: '#CBD5E1',
     maxWidth: '560px',
     lineHeight: 1.6
@@ -118,15 +146,13 @@ const styles = {
     flexWrap: 'wrap',
     alignItems: 'center',
     gap: '12px',
-    marginTop: '0.4rem'
+    marginTop: '0.4rem',
+    width: '100%'
   },
   btnSecondaryDark: {
     background: 'rgba(255, 255, 255, 0.08)',
     color: '#FFFFFF',
     borderColor: 'rgba(255, 255, 255, 0.18)',
     backdropFilter: 'blur(8px)'
-  },
-  visualSpacer: {
-    minHeight: '340px'
   }
 };

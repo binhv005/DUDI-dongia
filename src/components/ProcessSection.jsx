@@ -61,8 +61,8 @@ export function ProcessSection() {
         <h2 style={{ color: '#0F172A', textShadow: '0 1px 2px rgba(255, 255, 255, 0.8)' }}>5 Bước Phối Hợp Kỹ Thuật Chuẩn Hóa</h2>
       </div>
 
-      {/* Infographic Flow */}
-      <div className="process-infographic-container" style={styles.infographicWrapper}>
+      {/* Desktop Infographic Flow */}
+      <div className="process-desktop-flow process-infographic-container" style={styles.infographicWrapper}>
         <div className="process-infographic-track" style={styles.stepsTrack}>
           {STEP_THEMES.map((step, idx) => {
             const isHovered = hoveredIdx === idx;
@@ -166,6 +166,44 @@ export function ProcessSection() {
         </div>
       </div>
 
+      {/* Mobile Vertical Flow */}
+      <div className="process-mobile-timeline">
+        {STEP_THEMES.map((step, idx) => (
+          <div key={step.number} className="mobile-step-item">
+            <div className="mobile-step-left">
+              <div
+                className="mobile-step-circle"
+                style={{
+                  borderColor: step.ringColor,
+                  background: step.color
+                }}
+              >
+                <span className="mobile-step-num">{step.number}</span>
+              </div>
+              {idx < STEP_THEMES.length - 1 && (
+                <div
+                  className="mobile-step-connector"
+                  style={{ background: `linear-gradient(180deg, ${step.color}, ${STEP_THEMES[idx + 1].color})` }}
+                />
+              )}
+            </div>
+            <div className="mobile-step-content">
+              <div className="mobile-step-header">
+                <span className="mobile-step-badge" style={{ color: step.color, borderColor: `${step.color}40`, background: `${step.color}10` }}>
+                  BƯỚC {step.number}
+                </span>
+                <h4 className="mobile-step-title">
+                  {step.label}
+                </h4>
+              </div>
+              <p className="mobile-step-desc">
+                {step.line1} {step.line2}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div style={styles.ruleBanner}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E52E2E" strokeWidth="2">
           <circle cx="12" cy="12" r="10"></circle>
@@ -177,6 +215,102 @@ export function ProcessSection() {
           DUDI cam kết không tự động vượt ngân sách. Nếu phát sinh dự kiến vượt số giờ đã được phê duyệt, đội ngũ DUDI sẽ chủ động dừng lại và xin phê duyệt bổ sung trước khi tiếp tục.
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .process-mobile-timeline {
+          display: none;
+        }
+
+        @media (max-width: 860px) {
+          .process-desktop-flow {
+            display: none !important;
+          }
+          .process-mobile-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 540px;
+            margin: 12px auto 16px auto;
+            padding: 0 4px;
+          }
+          .mobile-step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            position: relative;
+          }
+          .mobile-step-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex-shrink: 0;
+            width: 44px;
+          }
+          .mobile-step-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 3px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            z-index: 2;
+          }
+          .mobile-step-num {
+            font-size: 1.05rem;
+            font-weight: 900;
+            line-height: 1;
+          }
+          .mobile-step-connector {
+            width: 2.5px;
+            height: 100%;
+            min-height: 32px;
+            margin: 4px 0;
+            border-radius: 2px;
+            opacity: 0.6;
+          }
+          .mobile-step-content {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            border-radius: 14px;
+            padding: 10px 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+          }
+          .mobile-step-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+          .mobile-step-badge {
+            font-size: 0.62rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid;
+            letter-spacing: 0.5px;
+          }
+          .mobile-step-title {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin: 0;
+          }
+          .mobile-step-desc {
+            font-size: 0.76rem;
+            color: #475569;
+            line-height: 1.45;
+            margin: 0;
+          }
+        }
+      `}} />
     </SectionWrapper>
   );
 }

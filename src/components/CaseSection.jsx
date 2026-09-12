@@ -117,16 +117,10 @@ export function CaseSection() {
               <div className="deliverable-tags">
                 {item.deliverables.map((deliv, idx) => (
                   <span key={idx} className="deliv-pill">
-                    ✓ {deliv}
+                    <span className="deliv-check">✓</span> {deliv}
                   </span>
                 ))}
               </div>
-            </div>
-
-            {/* Privacy & Guarantee Note */}
-            <div className="case-note-box">
-              <span className="note-star">★</span>
-              <span>{item.note}</span>
             </div>
           </div>
         ))}
@@ -146,14 +140,14 @@ export function CaseSection() {
 
         .case-card {
           position: relative;
-          background: #ffffff;
-          border: 1px solid #E2E8F0;
-          border-radius: 18px;
-          padding: 16px 18px;
+          background: linear-gradient(135deg, #FF2D55 0%, #E11D48 45%, #BE123C 100%);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          border-radius: 20px;
+          padding: 18px 20px;
           display: flex;
           flex-direction: column;
-          gap: 10px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+          gap: 12px;
+          box-shadow: 0 12px 32px rgba(225, 29, 72, 0.28), 0 2px 8px rgba(0, 0, 0, 0.08);
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           overflow: hidden;
         }
@@ -163,15 +157,15 @@ export function CaseSection() {
           top: 0;
           left: 0;
           right: 0;
-          height: 3.5px;
-          background: linear-gradient(90deg, #FF2D55 0%, #FF6B81 50%, #FF2D55 100%);
+          height: 3px;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
           opacity: 0;
           transition: opacity 0.3s ease;
         }
 
         .case-card:hover {
           transform: translateY(-5px);
-          box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 18px 40px rgba(225, 29, 72, 0.38), 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .case-card:hover .case-top-accent {
@@ -184,8 +178,8 @@ export function CaseSection() {
           align-items: center;
           justifyContent: space-between;
           gap: 10px;
-          border-bottom: 1px solid #F1F5F9;
-          padding-bottom: 8px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+          padding-bottom: 10px;
         }
 
         .case-header-left {
@@ -196,9 +190,9 @@ export function CaseSection() {
 
         .card-mascot-wrap {
           position: relative;
-          width: 38px;
-          height: 38px;
-          min-width: 38px;
+          width: 40px;
+          height: 40px;
+          min-width: 40px;
           display: flex;
           align-items: center;
           justifyContent: center;
@@ -208,12 +202,12 @@ export function CaseSection() {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          filter: drop-shadow(0 4px 8px rgba(239, 68, 68, 0.35));
+          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .case-card:hover .card-robot-head-img {
-          transform: scale(1.18) rotate(4deg);
+          transform: scale(1.16) rotate(4deg);
         }
 
         .case-title-group {
@@ -223,38 +217,40 @@ export function CaseSection() {
         }
 
         .case-code {
-          font-size: 0.65rem;
+          font-size: 0.68rem;
           font-weight: 800;
-          letter-spacing: 1px;
-          color: #EF4444;
+          letter-spacing: 1.2px;
+          color: #FEF08A;
           text-transform: uppercase;
         }
 
         .case-title {
-          font-size: 0.92rem;
+          font-size: 0.96rem;
           font-weight: 800;
-          color: #0F172A;
+          color: #ffffff;
           margin: 0;
           line-height: 1.25;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
         }
 
         .case-status-badge {
           display: flex;
           align-items: center;
-          gap: 5px;
-          background: #ECFDF5;
-          border: 1px solid #A7F3D0;
+          gap: 6px;
+          background: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.9);
           color: #059669;
           font-size: 0.68rem;
-          font-weight: 700;
-          padding: 3px 8px;
+          font-weight: 800;
+          padding: 4px 10px;
           border-radius: 20px;
           white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
         }
 
         .status-dot {
-          width: 6px;
-          height: 6px;
+          width: 7px;
+          height: 7px;
           border-radius: 50%;
           background: #10B981;
           box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
@@ -264,14 +260,15 @@ export function CaseSection() {
         .case-roles-row {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
         }
 
         .case-row-label {
-          font-size: 0.72rem;
-          font-weight: 700;
-          color: #64748B;
-          min-width: 52px;
+          font-size: 0.74rem;
+          font-weight: 800;
+          color: #ffffff;
+          min-width: 54px;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
         }
 
         .roles-tags {
@@ -283,88 +280,100 @@ export function CaseSection() {
         .role-pill {
           display: flex;
           align-items: center;
-          gap: 5px;
-          background: #F8FAFC;
-          border: 1px solid #E2E8F0;
-          color: #334155;
+          gap: 6px;
+          background: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.9);
+          color: #0F172A;
           font-size: 0.72rem;
-          font-weight: 600;
-          padding: 2px 7px;
-          border-radius: 6px;
+          font-weight: 700;
+          padding: 4px 9px;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s ease;
+        }
+
+        .role-pill svg {
+          color: #E11D48;
+        }
+
+        .role-pill:hover {
+          transform: translateY(-2px);
         }
 
         /* Timesheet Box */
         .timesheet-box {
-          background: #F8FAFC;
-          border: 1px solid #E2E8F0;
-          border-radius: 12px;
-          padding: 9px 12px;
+          background: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.9);
+          border-radius: 14px;
+          padding: 12px 14px;
           display: flex;
           flex-direction: column;
-          gap: 5px;
+          gap: 8px;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
           transition: all 0.25s ease;
-        }
-
-        .case-card:hover .timesheet-box {
-          background: #FFF5F5;
-          border-color: #FECACA;
         }
 
         .timesheet-header {
           display: flex;
           justifyContent: space-between;
           align-items: center;
-          font-size: 0.72rem;
+          width: 100%;
+          font-size: 0.74rem;
+          gap: 12px;
         }
 
         .timesheet-label {
-          font-weight: 700;
-          color: #475569;
+          font-weight: 800;
+          color: #1E293B;
         }
 
         .timesheet-saving {
-          font-weight: 700;
+          font-weight: 800;
           color: #DC2626;
           background: #FEF2F2;
-          padding: 1px 7px;
-          border-radius: 10px;
+          padding: 3px 10px;
+          border-radius: 12px;
           border: 1px solid #FECACA;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
         .hours-stats-row {
           display: flex;
           justifyContent: space-between;
           align-items: center;
+          width: 100%;
           font-size: 0.76rem;
         }
 
         .stat-name {
           color: #64748B;
           margin-right: 4px;
+          font-weight: 600;
         }
 
         .stat-val.est {
-          color: #64748B;
-          font-weight: 600;
+          color: #475569;
+          font-weight: 700;
         }
 
         .stat-val.act {
           color: #0F172A;
-          font-weight: 800;
+          font-weight: 900;
         }
 
         .hours-progress-bar {
           width: 100%;
-          height: 6px;
-          background: #E2E8F0;
-          border-radius: 4px;
+          height: 7px;
+          background: #F1F5F9;
+          border-radius: 6px;
           overflow: hidden;
         }
 
         .hours-progress-fill {
           height: 100%;
           background: linear-gradient(90deg, #10B981 0%, #059669 100%);
-          border-radius: 4px;
+          border-radius: 6px;
           transition: width 0.6s ease;
         }
 
@@ -372,7 +381,7 @@ export function CaseSection() {
         .case-deliverables {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
         }
 
         .deliverable-tags {
@@ -382,32 +391,27 @@ export function CaseSection() {
         }
 
         .deliv-pill {
-          background: #F0FDF4;
-          border: 1px solid #DCFCE7;
-          color: #166534;
-          font-size: 0.7rem;
-          font-weight: 600;
-          padding: 2px 7px;
-          border-radius: 6px;
-        }
-
-        /* Note Box */
-        .case-note-box {
           display: flex;
           align-items: center;
-          gap: 6px;
-          background: #F8FAFC;
-          border-left: 3px solid #EF4444;
-          padding: 6px 10px;
-          border-radius: 0 8px 8px 0;
+          gap: 4px;
+          background: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.9);
+          color: #0F172A;
           font-size: 0.72rem;
-          color: #475569;
-          line-height: 1.35;
+          font-weight: 700;
+          padding: 4px 9px;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s ease;
         }
 
-        .note-star {
-          color: #EF4444;
-          font-weight: 800;
+        .deliv-pill .deliv-check {
+          color: #059669;
+          font-weight: 900;
+        }
+
+        .deliv-pill:hover {
+          transform: translateY(-2px);
         }
 
         @media (max-width: 900px) {

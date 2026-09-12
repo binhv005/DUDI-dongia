@@ -5,7 +5,7 @@ import { companyDetails } from '../data/navigation';
 export function FinalCTA({ onNavigate }) {
   return (
     <SectionWrapper id="s12-cta" className="final-cta-section">
-      <div style={styles.box}>
+      <div className="final-cta-box" style={styles.box}>
         <div style={styles.content}>
           <div className="section-tag" style={styles.badge}>
             <span className="section-tag-dot"></span> Sẵn Sàng Triển Khai
@@ -32,6 +32,18 @@ export function FinalCTA({ onNavigate }) {
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (max-width: 768px) {
+          .final-cta-box {
+            padding: 36px 18px !important;
+            min-height: auto !important;
+          }
+          .final-cta-box .btn {
+            width: 100%;
+          }
+        }
+      `}} />
     </SectionWrapper>
   );
 }

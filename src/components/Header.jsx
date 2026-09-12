@@ -18,10 +18,10 @@ export function Header({ onNavigate }) {
           style={styles.logoLink}
           aria-label="DUDI Software Trang chủ"
         >
-          <img src="/logo.webp" alt="DUDI Software Logo" width="38" height="38" style={{ height: '38px', width: 'auto', borderRadius: '6px' }} />
-          <span style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '0.5px', color: '#E52E2E', marginLeft: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <img src="/logo.webp" alt="DUDI Software Logo" width="34" height="34" style={{ height: '34px', width: 'auto', borderRadius: '6px' }} />
+          <span style={{ fontSize: '1.2rem', fontWeight: 900, letterSpacing: '0.5px', color: '#E52E2E', marginLeft: '8px', display: 'flex', alignItems: 'center', gap: '5px' }}>
             <span>DUDI</span>
-            <span style={{ color: '#E52E2E', fontSize: '0.88rem', fontWeight: 800, letterSpacing: '2px' }}>SOFTWARE</span>
+            <span className="brand-suffix" style={{ color: '#E52E2E', fontSize: '0.82rem', fontWeight: 800, letterSpacing: '1.5px' }}>SOFTWARE</span>
           </span>
         </a>
 
@@ -44,8 +44,9 @@ export function Header({ onNavigate }) {
 
         {/* Header Actions */}
         <div style={styles.actions}>
-          <button onClick={() => handleNavClick('s11-form')} className="btn btn-primary btn-sm">
-            Gửi backlog để nhận ước lượng
+          <button onClick={() => handleNavClick('s11-form')} className="btn btn-primary btn-sm header-cta-btn">
+            <span className="cta-full">Gửi backlog để nhận ước lượng</span>
+            <span className="cta-short">Gửi backlog</span>
           </button>
 
           <button
@@ -76,6 +77,34 @@ export function Header({ onNavigate }) {
           </ul>
         </div>
       )}
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .cta-short {
+          display: none;
+        }
+
+        @media (max-width: 860px) {
+          .header-container {
+            padding: 0 14px !important;
+          }
+          .cta-full {
+            display: none !important;
+          }
+          .cta-short {
+            display: inline !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .brand-suffix {
+            display: none !important;
+          }
+          .header-cta-btn {
+            padding: 6px 10px !important;
+            font-size: 0.76rem !important;
+          }
+        }
+      `}} />
     </header>
   );
 }

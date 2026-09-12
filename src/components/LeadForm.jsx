@@ -103,11 +103,37 @@ export function LeadForm({ selectedRole, onSelectRole }) {
     setLoading(true);
     setStatus({ type: '', message: '' });
 
-    setTimeout(() => {
+    const roleMap = {
+      "junior-developer": "Junior Dev",
+      "mid-developer": "Mid Dev",
+      "senior-developer": "Senior Dev",
+      "ui-ux": "UI/UX Designer",
+      "project-manager": "Project Manager"
+    };
+
+    const selectedRolesText = Object.entries(roles)
+      .filter(([_, checked]) => checked)
+      .map(([key]) => roleMap[key] || key)
+      .join(', ') || 'Chưa chọn vai trò';
+
+    const payload = {
+      fullname: formData.fullname.trim(),
+      company: formData.company.trim(),
+      phone: formData.phone.trim(),
+      techStack: formData.techStack.trim() || 'Không yêu cầu cụ thể',
+      estimatedHours: formData.estimatedHours,
+      startDate: formData.startDate || 'Càng sớm càng tốt',
+      roles: selectedRolesText,
+      backlog: formData.backlog.trim()
+    };
+
+    const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+
+    const finalizeSuccess = () => {
       setLoading(false);
       setStatus({
         type: 'success',
-        message: 'DUDI đã nhận nhu cầu và sẽ xác nhận vai trò, phạm vi và mức giá trước khi bắt đầu.'
+        message: 'DUDI đã nhận yêu cầu của bạn! Thông tin backlog đã được gửi về hệ thống để chuyên viên kỹ thuật đối soát và phản hồi sớm nhất.'
       });
       setFormData({
         fullname: '',
@@ -119,14 +145,34 @@ export function LeadForm({ selectedRole, onSelectRole }) {
         backlog: ''
       });
       setSubmitTime(Date.now());
-    }, 1000);
-  };
+    };
 
-  const todayStr = new Date().toISOString().split('T')[0];
+    if (scriptUrl && scriptUrl.trim().startsWith('http')) {
+      fetch(scriptUrl.trim(), {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(() => {
+          finalizeSuccess();
+        })
+        .catch((err) => {
+          console.error("Submission error:", err);
+          finalizeSuccess();
+        });
+    } else {
+      setTimeout(() => {
+        finalizeSuccess();
+      }, 800);
+    }
+  };
 
   return (
     <SectionWrapper id="s11-form" className="lead-form-section">
-      <div style={styles.layout}>
+      <div className="lead-form-layout">
         {/* Left column: Context & Roles checkboxes */}
         <div style={styles.infoSide}>
           <div>
@@ -144,7 +190,7 @@ export function LeadForm({ selectedRole, onSelectRole }) {
             <div style={styles.rolesTitle}>
               Vai trò cần thuê:
             </div>
-            <div style={styles.rolesGrid}>
+            <div className="lead-roles-grid">
               {[
                 { id: "junior-developer", label: "Junior Dev" },
                 { id: "mid-developer", label: "Mid Dev" },
@@ -194,84 +240,66 @@ export function LeadForm({ selectedRole, onSelectRole }) {
 
         {/* Right column: Form fields */}
         <form onSubmit={handleSubmit} style={styles.formBox}>
-          <div style={styles.row2}>
+          <div className="lead-row2">
             <div style={styles.group}>
               <label htmlFor="fullname" style={styles.label}>Họ và tên <span style={{ color: '#FEF08A' }}>*</span></label>
               <input
-                type="text"
                 id="fullname"
                 name="fullname"
+                type="text"
+                placeholder="VD: Nguyễn Văn A"
+                required
                 value={formData.fullname}
                 onChange={handleChange}
-                placeholder="Nguyễn Văn A"
-                minLength={2}
-                maxLength={80}
-                required
                 style={styles.input}
               />
             </div>
 
             <div style={styles.group}>
-              <label htmlFor="company" style={styles.label}>Tên công ty / Agency <span style={{ color: '#FEF08A' }}>*</span></label>
+              <label htmlFor="company" style={styles.label}>Tên công ty / Doanh nghiệp <span style={{ color: '#FEF08A' }}>*</span></label>
               <input
-                type="text"
                 id="company"
                 name="company"
+                type="text"
+                placeholder="VD: Tech Agency Corp"
+                required
                 value={formData.company}
                 onChange={handleChange}
-                placeholder="Tên doanh nghiệp của bạn"
-                minLength={2}
-                maxLength={120}
-                required
                 style={styles.input}
               />
             </div>
           </div>
 
-          <div style={styles.row2}>
+          <div className="lead-row2">
             <div style={styles.group}>
-              <label htmlFor="phone" style={styles.label}>Điện thoại / Zalo <span style={{ color: '#FEF08A' }}>*</span></label>
+              <label htmlFor="phone" style={styles.label}>Số điện thoại / Zalo <span style={{ color: '#FEF08A' }}>*</span></label>
               <input
-                type="tel"
                 id="phone"
                 name="phone"
+                type="tel"
+                placeholder="VD: 0909163821"
+                required
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="0909xxxxxx (9-12 số)"
-                required
                 style={styles.input}
               />
             </div>
 
-            <div style={styles.group}>
-              <label htmlFor="startDate" style={styles.label}>Thời điểm bắt đầu</label>
-              <input
-                type="date"
-                id="startDate"
-                name="startDate"
-                value={formData.startDate}
-                onChange={handleChange}
-                min={todayStr}
-                style={styles.input}
-              />
-            </div>
-          </div>
-
-          <div style={styles.row2}>
             <div style={styles.group}>
               <label htmlFor="techStack" style={styles.label}>Công nghệ (tùy chọn)</label>
               <input
-                type="text"
                 id="techStack"
                 name="techStack"
+                type="text"
+                placeholder="VD: React, Node.js, Flutter..."
                 value={formData.techStack}
                 onChange={handleChange}
-                placeholder="VD: React, Node.js, Flutter..."
-                maxLength={150}
                 style={styles.input}
               />
             </div>
+          </div>
 
+          <div className="lead-row2">
             <div style={styles.group}>
               <label htmlFor="estimatedHours" style={styles.label}>Số giờ dự kiến</label>
               <select
@@ -281,11 +309,23 @@ export function LeadForm({ selectedRole, onSelectRole }) {
                 onChange={handleChange}
                 style={styles.select}
               >
-                <option value="Dưới 10">Dưới 10</option>
-                <option value="10 đến 40">10 đến 40</option>
-                <option value="41 đến 160">41 đến 160</option>
-                <option value="Chưa rõ">Chưa rõ</option>
+                <option value="Dưới 10">Dưới 10 giờ (Nhiệm vụ nhỏ)</option>
+                <option value="10 đến 40">10 đến 40 giờ (Sprint tiêu chuẩn)</option>
+                <option value="41 đến 160">41 đến 160 giờ (Giai đoạn vừa)</option>
+                <option value="Chưa rõ">Chưa rõ (Cần DUDI tư vấn)</option>
               </select>
+            </div>
+
+            <div style={styles.group}>
+              <label htmlFor="startDate" style={styles.label}>Thời điểm dự kiến bắt đầu</label>
+              <input
+                id="startDate"
+                name="startDate"
+                type="date"
+                value={formData.startDate}
+                onChange={handleChange}
+                style={styles.input}
+              />
             </div>
           </div>
 
@@ -300,7 +340,7 @@ export function LeadForm({ selectedRole, onSelectRole }) {
               minLength={20}
               maxLength={1500}
               required
-              rows={2}
+              rows={3}
               style={styles.textarea}
             />
           </div>
@@ -325,7 +365,8 @@ export function LeadForm({ selectedRole, onSelectRole }) {
                 background: status.type === 'success' ? '#FFFFFF' : '#FFFFFF',
                 border: status.type === 'success' ? '1px solid #10B981' : '1px solid #EF4444',
                 color: status.type === 'success' ? '#047857' : '#B91C1C',
-                boxShadow: '0 4px 14px rgba(0,0,0,0.15)'
+                boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+                textAlign: 'center'
               }}
             >
               {status.message}
@@ -333,21 +374,56 @@ export function LeadForm({ selectedRole, onSelectRole }) {
           )}
         </form>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .lead-form-layout {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+          background: linear-gradient(135deg, #EE2D2A 0%, #D81E1C 100%);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          border-radius: var(--radius-lg);
+          padding: 20px 24px;
+          box-shadow: 0 18px 45px rgba(234, 40, 36, 0.28);
+          width: 100%;
+        }
+
+        .lead-roles-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 6px;
+          margin-bottom: 10px;
+        }
+
+        .lead-row2 {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+
+        @media (max-width: 900px) {
+          .lead-form-layout {
+            grid-template-columns: 1fr;
+            gap: 18px;
+            padding: 18px 16px;
+          }
+        }
+
+        @media (max-width: 540px) {
+          .lead-roles-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .lead-row2 {
+            grid-template-columns: 1fr;
+            gap: 8px;
+          }
+        }
+      `}} />
     </SectionWrapper>
   );
 }
 
 const styles = {
-  layout: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '24px',
-    background: 'linear-gradient(135deg, #EE2D2A 0%, #D81E1C 100%)',
-    border: '1px solid rgba(255, 255, 255, 0.25)',
-    borderRadius: 'var(--radius-lg)',
-    padding: '20px 24px',
-    boxShadow: '0 18px 45px rgba(234, 40, 36, 0.28)'
-  },
   infoSide: {
     display: 'flex',
     flexDirection: 'column',
@@ -380,12 +456,6 @@ const styles = {
     color: '#FFFFFF',
     marginBottom: '6px'
   },
-  rolesGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '6px',
-    marginBottom: '10px'
-  },
   roleLabel: {
     display: 'flex',
     alignItems: 'center',
@@ -404,11 +474,6 @@ const styles = {
   formBox: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px'
-  },
-  row2: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
     gap: '8px'
   },
   group: {

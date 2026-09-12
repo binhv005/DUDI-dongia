@@ -418,6 +418,34 @@ export function ProblemSection() {
           }
           .orbit-center-hub {
             order: -1;
+            margin: 15px auto;
+            width: 100%;
+            overflow: visible;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .orbit-center-hub {
+            min-height: 250px;
+          }
+          .orbit-wheel {
+            transform: scale(0.68);
+            transform-origin: center center;
+            margin: -25px auto;
+          }
+          .orbit-pill-label {
+            font-size: 0.68rem;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .orbit-center-hub {
+            min-height: 230px;
+          }
+          .orbit-wheel {
+            transform: scale(0.58);
+            transform-origin: center center;
+            margin: -35px auto;
           }
         }
       `}} />

@@ -60,7 +60,7 @@ export function PricingExplorer({ selectedRole, onSelectRole, onNavigate }) {
           </div>
         </div>
 
-        <div style={styles.noticeBox}>
+        <div className="pricing-notice-box">
           <div style={styles.noticeText}>
             <strong>* {pricingNotice.title} </strong> {pricingNotice.content}
           </div>
@@ -69,6 +69,31 @@ export function PricingExplorer({ selectedRole, onSelectRole, onNavigate }) {
           </button>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .pricing-notice-box {
+          padding: 10px 16px;
+          border-radius: var(--radius-md);
+          background: #FFFFFF;
+          border: 1px solid var(--border-glass);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          box-shadow: var(--shadow-sm);
+        }
+
+        @media (max-width: 768px) {
+          .pricing-notice-box {
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+          }
+          .pricing-notice-box .btn {
+            width: 100%;
+          }
+        }
+      `}} />
     </SectionWrapper>
   );
 }
@@ -141,17 +166,6 @@ const styles = {
     color: 'var(--text-pure)',
     cursor: 'pointer',
     transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
-  },
-  noticeBox: {
-    padding: '8px 14px',
-    borderRadius: 'var(--radius-md)',
-    background: '#FFFFFF',
-    border: '1px solid var(--border-glass)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: '12px',
-    boxShadow: 'var(--shadow-sm)'
   },
   noticeText: {
     fontSize: '0.78rem',
