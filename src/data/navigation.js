@@ -1,8 +1,19 @@
+export const webSystemLinks = [
+  { id: "link-1", label: "Cập nhật", url: "https://dudi-page.vercel.app/" },
+  { id: "link-2", label: "Dịch vụ", url: "https://dudi-dichvu.vercel.app/" },
+  { id: "link-3", label: "Bán hàng", url: "https://dudi-banhang.vercel.app/" },
+  { id: "link-4", label: "SEO", url: "https://dudisoftwareseo.vercel.app/" },
+  { id: "link-5", label: "Bảo trì", url: "https://dudi-baotri.vercel.app/" },
+  { id: "link-6", label: "Giới thiệu", url: "https://dudi-gioithieu.vercel.app/" },
+  { id: "link-7", label: "Tổng hợp", url: "https://dudi-tonghop.vercel.app/" }
+];
+
 export const navItems = [
   { id: "s03-target", label: "Đối tượng", number: "02" },
   { id: "s05-output", label: "Dịch vụ", number: "04" },
   { id: "s06-pricing", label: "Bảng giá", number: "05" },
   { id: "s07-process", label: "Quy trình", number: "06" },
+  { id: "web-system", label: "Hệ thống web", isDropdown: true, children: webSystemLinks },
   { id: "s10-faq", label: "FAQ", number: "09" },
   { id: "s13-footer", label: "Liên hệ", number: "12" }
 ];

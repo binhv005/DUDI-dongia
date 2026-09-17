@@ -5,11 +5,19 @@ export function SectionWrapper({ id, children, className = "", style = {}, noAni
   const prefersReducedMotion = useReducedMotion();
 
   const sectionVariants = {
-    hidden: { opacity: prefersReducedMotion || noAnimation ? 1 : 0, y: prefersReducedMotion || noAnimation ? 0 : 24 },
+    hidden: {
+      opacity: prefersReducedMotion || noAnimation ? 1 : 0,
+      y: prefersReducedMotion || noAnimation ? 0 : 24,
+      filter: prefersReducedMotion || noAnimation ? 'none' : 'blur(4px)'
+    },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1]
+      }
     }
   };
 
@@ -20,7 +28,7 @@ export function SectionWrapper({ id, children, className = "", style = {}, noAni
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: false, amount: 0.18 }}
       >
         {children}
       </motion.div>

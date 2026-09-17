@@ -56,62 +56,58 @@ export function AudienceSection() {
                 borderColor: isActiveState ? theme.color : 'var(--border-glass)',
                 background: isActiveState ? theme.hoverBg : 'var(--bg-card)',
                 boxShadow: isActiveState ? `0 18px 36px ${theme.shadow}` : 'var(--shadow-sm)',
-                transform: isActiveState ? 'translateY(-6px)' : 'none'
+                transform: isActiveState ? 'translateY(-4px)' : 'none'
               }}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setSelectedAudience(item.id); }}
             >
-              <div>
-                {/* Image Banner */}
-                {item.image && (
-                  <div style={styles.imageWrapper}>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      style={{
-                        ...styles.cardImg,
-                        transform: isActiveState ? 'scale(1.06)' : 'scale(1)'
-                      }}
-                      loading="lazy"
-                    />
-                    <div
-                      style={{
-                        ...styles.iconBadgeOverlay,
-                        background: theme.iconBg,
-                        borderColor: theme.iconBorder,
-                        color: theme.color
-                      }}
-                    >
-                      {item.id === 'agency' && (
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                      )}
-                      {item.id === 'enterprise' && (
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                      )}
-                      {item.id === 'whitelabel' && (
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                      )}
-                    </div>
+              {/* Full-bleed Top Image Banner */}
+              {item.image && (
+                <div style={styles.imageWrapper}>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    style={{
+                      ...styles.cardImg,
+                      transform: isActiveState ? 'scale(1.06)' : 'scale(1)'
+                    }}
+                    loading="lazy"
+                  />
+                  <div
+                    style={{
+                      ...styles.iconBadgeOverlay,
+                      background: theme.iconBg,
+                      borderColor: theme.iconBorder,
+                      color: theme.color
+                    }}
+                  >
+                    {item.id === 'agency' && (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    )}
+                    {item.id === 'enterprise' && (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    )}
+                    {item.id === 'whitelabel' && (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 17 22 12"></polyline></svg>
+                    )}
                   </div>
-                )}
+                </div>
+              )}
 
-                <h3 style={{ fontSize: '1rem', marginBottom: '2px', color: 'var(--text-pure)' }}>{item.title}</h3>
+              {/* Card Body */}
+              <div style={styles.cardBody}>
+                <h3 style={styles.cardTitle}>{item.title}</h3>
                 
-                {/* Each card has its distinct color for the tagline */}
-                <div style={{ fontSize: '0.74rem', color: theme.color, fontWeight: 700, marginBottom: '6px' }}>
+                {/* Tagline */}
+                <div style={{ fontSize: '0.78rem', color: theme.color, fontWeight: 700, marginBottom: '8px', lineHeight: 1.35 }}>
                   {item.tagline}
                 </div>
 
-                <p style={{ fontSize: '0.78rem', color: 'var(--text-body)', lineHeight: 1.42 }}>
+                {/* Description */}
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-body)', lineHeight: 1.5, margin: 0 }}>
                   {item.description}
                 </p>
-              </div>
-
-              {/* Clean solution box */}
-              <div style={styles.solutionBox}>
-                <span style={{ color: 'var(--text-muted)' }}>Mô hình đề xuất: </span>
-                <strong style={{ color: 'var(--text-pure)' }}>{item.recommendedModel}</strong>
               </div>
             </div>
           );
@@ -122,9 +118,10 @@ export function AudienceSection() {
         .audience-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
-          margin-top: 0.4rem;
+          gap: 18px;
+          margin-top: 0.6rem;
           width: 100%;
+          align-items: stretch;
         }
 
         @media (max-width: 900px) {
@@ -142,10 +139,10 @@ const styles = {
   card: {
     borderRadius: 'var(--radius-lg)',
     border: '1px solid',
-    padding: '12px 14px',
+    padding: 0,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     cursor: 'pointer',
     transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
     overflow: 'hidden'
@@ -153,12 +150,11 @@ const styles = {
   imageWrapper: {
     position: 'relative',
     width: '100%',
-    height: '115px',
-    borderRadius: 'var(--radius-md)',
+    height: '145px',
+    margin: 0,
     overflow: 'hidden',
-    marginBottom: '10px',
-    border: '1px solid rgba(15, 23, 42, 0.08)',
-    background: '#F8FAFC'
+    background: '#F8FAFC',
+    borderBottom: '1px solid rgba(15, 23, 42, 0.08)'
   },
   cardImg: {
     width: '100%',
@@ -169,25 +165,31 @@ const styles = {
   },
   iconBadgeOverlay: {
     position: 'absolute',
-    top: '6px',
-    left: '6px',
-    width: '32px',
-    height: '32px',
+    top: '10px',
+    left: '10px',
+    width: '34px',
+    height: '34px',
     borderRadius: 'var(--radius-sm)',
     border: '1px solid',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backdropFilter: 'blur(8px)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-    background: 'rgba(255, 255, 255, 0.92)'
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.12)',
+    background: 'rgba(255, 255, 255, 0.94)'
   },
-  solutionBox: {
-    marginTop: '10px',
-    padding: '6px 10px',
-    borderRadius: 'var(--radius-sm)',
-    background: '#F1F5F9',
-    border: '1px solid rgba(15, 23, 42, 0.05)',
-    fontSize: '0.75rem'
+  cardBody: {
+    padding: '14px 16px 16px 16px',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1
+  },
+  cardTitle: {
+    fontSize: '1.02rem',
+    fontWeight: 700,
+    margin: '0 0 4px 0',
+    color: 'var(--text-pure)',
+    letterSpacing: '-0.01em',
+    lineHeight: 1.3
   }
 };

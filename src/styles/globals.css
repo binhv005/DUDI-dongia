@@ -34,6 +34,23 @@ body {
   overflow-x: hidden;
 }
 
+/* Global Page Fade-In Transition */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-root {
+  animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
 /* Subtle Light Grid Overlay */
 .bg-grid-overlay {
   position: fixed;
@@ -102,49 +119,33 @@ button, input, select, textarea {
   height: 0px;
 }
 
-/* Alternating Light Theme Backgrounds Across Sections */
-.section-wrapper.audience-section {
-  background-color: var(--bg-light-white);
-}
-
-.section-wrapper.problem-section {
-  background-color: var(--bg-light-tint);
-  border-top: 1px solid #E2E8F0;
-  border-bottom: 1px solid #E2E8F0;
-}
-
-.section-wrapper.output-section {
-  background-color: var(--bg-light-white);
-}
-
-.section-wrapper.pricing-section {
-  background-color: var(--bg-light-tint);
-  border-top: 1px solid #E2E8F0;
-  border-bottom: 1px solid #E2E8F0;
-}
-
-.section-wrapper.process-section {
-  background-color: var(--bg-light-white);
-}
-
-.section-wrapper.case-section {
-  background-color: var(--bg-light-tint);
-  border-top: 1px solid #E2E8F0;
-  border-bottom: 1px solid #E2E8F0;
-}
-
-.section-wrapper.limitation-section {
-  background-color: var(--bg-light-white);
-}
-
-.section-wrapper.faq-section {
-  background-color: var(--bg-light-tint);
-  border-top: 1px solid #E2E8F0;
-  border-bottom: 1px solid #E2E8F0;
-}
-
+/* ==========================================================================
+   ALTERNATING TECH BACKGROUNDS ACROSS SECTIONS
+   ========================================================================== */
+/* Tech Style A: Crisp Canvas with Soft Ambient Radial Flare */
+.section-wrapper.audience-section,
+.section-wrapper.output-section,
+.section-wrapper.process-section,
+.section-wrapper.limitation-section,
 .section-wrapper.lead-form-section {
-  background-color: var(--bg-light-white);
+  background-color: #FFFFFF;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(229, 46, 46, 0.025) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(29, 100, 242, 0.025) 0%, transparent 45%);
+}
+
+/* Tech Style B: Cool Cyber Slate with Tech Matrix Dot Grid */
+.section-wrapper.problem-section,
+.section-wrapper.pricing-section,
+.section-wrapper.case-section,
+.section-wrapper.faq-section {
+  background-color: #F8FAFC;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(229, 46, 46, 0.03) 0%, transparent 60%),
+    radial-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
 }
 
 .section-container {

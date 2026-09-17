@@ -2,8 +2,8 @@ export const audiencesData = [
   {
     id: "agency",
     title: "Agency Sáng Tạo & Tech",
-    tagline: "Cần bổ sung Developer / UI UX / PM cho backlog",
-    description: "Cần bổ sung nguồn lực kỹ thuật tức thì để đáp ứng khối lượng backlog dồn dập từ nhiều dự án khách hàng cùng lúc mà không cần mở rộng đội ngũ nội bộ cố định.",
+    tagline: "Bổ sung Dev, UI/UX & PM tức thì",
+    description: "Giải tỏa backlog dồn dập cho nhiều dự án mà không cần tăng nhân sự cố định.",
     recommendedModel: "Theo giờ hoặc theo sprint dự án",
     icon: "agency",
     image: "/images/audience-agency.webp"
@@ -11,8 +11,8 @@ export const audiencesData = [
   {
     id: "enterprise",
     title: "Doanh Nghiệp Đang Vận Hành",
-    tagline: "Có backlog kỹ thuật thay đổi thường xuyên",
-    description: "Có backlog tính năng, nâng cấp và bảo trì biến động liên tục theo thực tế kinh doanh. Cần đội ngũ kỹ thuật triển khai chuẩn chỉnh, minh bạch chi phí theo giờ thực tế.",
+    tagline: "Xử lý backlog linh hoạt theo thực tế",
+    description: "Triển khai tính năng và bảo trì liên tục, minh bạch chi phí theo giờ thực tế.",
     recommendedModel: "Theo giờ và timesheet thực tế",
     icon: "enterprise",
     image: "/images/audience-enterprise.webp"
@@ -20,8 +20,8 @@ export const audiencesData = [
   {
     id: "whitelabel",
     title: "Đối Tác Hợp Tác White Label",
-    tagline: "Cần đội kỹ thuật triển khai phía sau",
-    description: "Cần một đối tác kỹ thuật tin cậy đứng phía sau thực hiện toàn diện sản phẩm dưới thương hiệu riêng của bạn, bảo mật tuyệt đối và bàn giao trọn vẹn tài sản mã nguồn.",
+    tagline: "Đội kỹ thuật chuyên trách phía sau",
+    description: "Bàn giao trọn vẹn mã nguồn, bảo mật danh tính dưới thương hiệu riêng của bạn.",
     recommendedModel: "Theo nhóm hoặc trọn gói backlog",
     icon: "whitelabel",
     image: "/images/audience-whitelabel.webp"
@@ -62,14 +62,10 @@ export const problemsData = [
 ];
 
 export const outputPills = [
-  "Phân tích yêu cầu",
-  "Ước lượng backlog",
-  "Triển khai kỹ thuật",
-  "Kiểm thử (Testing)",
-  "Họp cần thiết",
-  "Timesheet chi tiết",
-  "Review code",
-  "Nghiệm thu & Bàn giao"
+  "Phân tích & Ước lượng backlog",
+  "Lập trình & Review mã nguồn",
+  "Kiểm thử (Testing) toàn diện",
+  "Timesheet & Bàn giao nghiệm thu"
 ];
 
 export const cooperationModels = [

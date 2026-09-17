@@ -270,12 +270,12 @@ export function ProblemSection() {
 
         .center-robot-head {
           position: relative;
-          width: 105px;
-          height: 105px;
+          width: 126px;
+          height: 126px;
           z-index: 2;
           display: flex;
           align-items: center;
-          justifyContent: center;
+          justify-content: center;
           animation: robotFloat 4s ease-in-out infinite alternate;
         }
 
@@ -286,11 +286,11 @@ export function ProblemSection() {
 
         .robot-glow-back {
           position: absolute;
-          width: 120px;
-          height: 120px;
+          width: 144px;
+          height: 144px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(239, 68, 68, 0.25) 0%, rgba(239, 68, 68, 0.05) 60%, transparent 80%);
-          filter: blur(8px);
+          background: radial-gradient(circle, rgba(239, 68, 68, 0.28) 0%, rgba(239, 68, 68, 0.06) 60%, transparent 80%);
+          filter: blur(10px);
           z-index: -1;
         }
 

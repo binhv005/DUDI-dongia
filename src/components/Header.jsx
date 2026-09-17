@@ -1,13 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { navItems, companyDetails } from '../data/navigation';
 
 export function Header({ onNavigate }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const closeTimeoutRef = useRef(null);
 
   const handleNavClick = (id) => {
     onNavigate(id);
     setMobileOpen(false);
+    setDropdownOpen(false);
   };
+
+  const handleDropdownItemClick = (targetId) => {
+    if (targetId) {
+      onNavigate(targetId);
+    }
+    setDropdownOpen(false);
+    setMobileOpen(false);
+  };
+
+  const handleMouseEnter = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 150);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
 
   return (
     <header className="main-header" id="s01-header" style={styles.header}>
@@ -28,17 +65,87 @@ export function Header({ onNavigate }) {
         {/* Desktop Nav */}
         <nav className="desktop-nav" aria-label="Menu chính">
           <ul style={styles.navMenu}>
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(item.id); }}
-                  style={styles.navLink}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              if (item.isDropdown) {
+                return (
+                  <li
+                    key={item.id}
+                    ref={dropdownRef}
+                    style={styles.dropdownParent}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      className={`nav-dropdown-trigger ${dropdownOpen ? 'active' : ''}`}
+                      style={{
+                        ...styles.dropdownBtn,
+                        color: dropdownOpen ? '#E52E2E' : 'var(--text-body)'
+                      }}
+                      aria-expanded={dropdownOpen}
+                    >
+                      <span>{item.label}</span>
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        style={{
+                          transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+                        }}
+                      >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+
+                    {/* Floating Dropdown Menu Card */}
+                    <div
+                      className={`header-dropdown-menu ${dropdownOpen ? 'open' : ''}`}
+                      style={styles.dropdownMenu}
+                    >
+                      <div style={styles.dropdownInner}>
+                        {item.children?.map((sub, idx) => (
+                          <a
+                            key={sub.id}
+                            href={sub.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => {
+                              setDropdownOpen(false);
+                              setMobileOpen(false);
+                            }}
+                            className="dropdown-item-link"
+                            style={{
+                              ...styles.dropdownItem,
+                              borderBottom: idx === (item.children.length - 1) ? 'none' : '1px solid #F1F5F9'
+                            }}
+                          >
+                            <span>{sub.label}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </li>
+                );
+              }
+
+              return (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(e) => { e.preventDefault(); handleNavClick(item.id); }}
+                    className="desktop-nav-link"
+                    style={styles.navLink}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -64,16 +171,72 @@ export function Header({ onNavigate }) {
       {mobileOpen && (
         <div style={styles.mobileDrawer}>
           <ul style={styles.mobileNavList}>
-            {navItems.map((item) => (
-              <li key={item.id} style={{ width: '100%' }}>
-                <button
-                  onClick={() => handleNavClick(item.id)}
-                  style={styles.mobileNavLink}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              if (item.isDropdown) {
+                return (
+                  <li key={item.id} style={{ width: '100%' }}>
+                    <button
+                      onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                      style={{
+                        ...styles.mobileNavLink,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        color: mobileDropdownOpen ? '#E52E2E' : 'var(--text-bright)'
+                      }}
+                    >
+                      <span>{item.label}</span>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        style={{
+                          transform: mobileDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.25s ease'
+                        }}
+                      >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+
+                    {/* Mobile Submenu */}
+                    {mobileDropdownOpen && (
+                      <div style={styles.mobileSubmenu}>
+                        {item.children?.map((sub) => (
+                          <a
+                            key={sub.id}
+                            href={sub.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => {
+                              setMobileOpen(false);
+                              setMobileDropdownOpen(false);
+                            }}
+                            style={styles.mobileSubNavLink}
+                          >
+                            {sub.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                );
+              }
+
+              return (
+                <li key={item.id} style={{ width: '100%' }}>
+                  <button
+                    onClick={() => handleNavClick(item.id)}
+                    style={styles.mobileNavLink}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}
@@ -81,6 +244,39 @@ export function Header({ onNavigate }) {
       <style dangerouslySetInnerHTML={{ __html: `
         .cta-short {
           display: none;
+        }
+
+        .desktop-nav-link:hover {
+          color: #E52E2E !important;
+        }
+
+        .nav-dropdown-trigger:hover {
+          color: #E52E2E !important;
+        }
+
+        .dropdown-item-link {
+          transition: all 0.2s ease;
+        }
+
+        .dropdown-item-link:hover {
+          background-color: #FFF5F5 !important;
+          color: #E52E2E !important;
+          padding-left: 24px !important;
+        }
+
+        .header-dropdown-menu {
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(8px);
+          transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+          pointer-events: none;
+        }
+
+        .header-dropdown-menu.open {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+          pointer-events: auto;
         }
 
         @media (max-width: 860px) {
@@ -140,30 +336,62 @@ const styles = {
   navMenu: {
     display: 'flex',
     alignItems: 'center',
-    gap: '20px',
+    gap: '22px',
     listStyle: 'none'
   },
   navLink: {
     fontSize: '0.88rem',
-    fontWeight: 500,
+    fontWeight: 600,
     color: 'var(--text-body)',
     padding: '6px 4px',
     transition: 'color var(--transition-fast)'
+  },
+  dropdownParent: {
+    position: 'relative'
+  },
+  dropdownBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px',
+    background: 'transparent',
+    border: 'none',
+    fontSize: '0.88rem',
+    fontWeight: 600,
+    cursor: 'pointer',
+    padding: '6px 4px',
+    transition: 'color var(--transition-fast)'
+  },
+  dropdownMenu: {
+    position: 'absolute',
+    top: 'calc(100% + 12px)',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '210px',
+    background: '#FFFFFF',
+    borderRadius: '16px',
+    boxShadow: '0 16px 36px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08)',
+    border: '1px solid rgba(0, 0, 0, 0.08)',
+    overflow: 'hidden',
+    zIndex: 1050
+  },
+  dropdownInner: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '4px 0'
+  },
+  dropdownItem: {
+    padding: '12px 20px',
+    fontSize: '0.92rem',
+    fontWeight: 700,
+    color: '#0F172A',
+    textDecoration: 'none',
+    display: 'block',
+    lineHeight: 1.2
   },
   actions: {
     display: 'flex',
     alignItems: 'center',
     gap: '10px'
-  },
-  hotlineBtn: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '6px',
-    color: 'var(--text-bright)',
-    padding: '6px 12px',
-    borderRadius: 'var(--radius-sm)',
-    background: 'rgba(255, 255, 255, 0.04)',
-    border: '1px solid var(--border-glass)'
   },
   mobileToggle: {
     display: 'none',
@@ -200,6 +428,25 @@ const styles = {
     fontSize: '1rem',
     fontWeight: 600,
     padding: '8px 0',
+    cursor: 'pointer'
+  },
+  mobileSubmenu: {
+    paddingLeft: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    marginTop: '6px',
+    borderLeft: '2px solid rgba(229, 46, 46, 0.4)'
+  },
+  mobileSubNavLink: {
+    width: '100%',
+    textAlign: 'left',
+    background: 'transparent',
+    border: 'none',
+    color: '#E2E8F0',
+    fontSize: '0.9rem',
+    fontWeight: 500,
+    padding: '6px 0',
     cursor: 'pointer'
   }
 };

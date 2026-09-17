@@ -21,23 +21,27 @@ export function OutputSection() {
               <span className="deco-dot dot-3" />
             </div>
 
-            <h3 className="output-arch-title">Đầu Việc Phạm Vi Triển Khai</h3>
-            <p className="output-arch-subtitle">Toàn diện các tiêu chuẩn kỹ thuật bàn giao</p>
+            <h3 className="output-arch-title">Phạm Vi Triển Khai</h3>
+            <p className="output-arch-subtitle">Quy chuẩn kỹ thuật và bàn giao</p>
 
-            <div className="output-pills-wrap">
+            <div className="output-checklist-wrap">
               {outputPills.map((pill, idx) => (
-                <span key={idx} className="output-pill-item">
-                  <span className="pill-dot" />
-                  {pill}
-                </span>
+                <div key={idx} className="output-check-item">
+                  <span className="check-icon-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  <span className="check-item-text">{pill}</span>
+                </div>
               ))}
             </div>
           </div>
 
           <div className="output-rule-box">
-            <div className="output-rule-badge">Định nghĩa 1 giờ tại DUDI:</div>
+            <div className="output-rule-badge">Định nghĩa 1 giờ tại DUDI</div>
             <p className="output-rule-desc">
-              <strong>60 phút làm việc thực tế</strong> bao gồm phân tích, lập trình, kiểm thử & họp cần thiết. Không tính giờ chờ. Timesheet minh bạch đối soát trước khi xuất hóa đơn.
+              <strong>60 phút làm việc thực tế</strong> (Dev, Test, Review). Không tính giờ chờ, đối soát timesheet minh bạch 100%.
             </p>
           </div>
         </div>

@@ -52,6 +52,6 @@ export const pricingRoles = [
 ];
 
 export const pricingNotice = {
-  title: "Lưu ý quan trọng về đơn giá:",
-  content: "Đây là khoảng giá tham khảo. Mức giá chính xác phụ thuộc vào độ khó công nghệ, mức độ tự chủ, deadline và trách nhiệm cụ thể của từng đầu việc trong backlog. Mức thấp áp dụng cho công việc rõ ràng và ít rủi ro; mức cao áp dụng khi cần tự chủ, chuyên môn sâu, xử lý gấp hoặc chịu trách nhiệm lớn."
+  title: "Lưu ý về đơn giá:",
+  content: "Khoảng giá tham khảo, chi phí chính xác phụ thuộc vào độ phức tạp công nghệ và yêu cầu thực tế của backlog."
 };
