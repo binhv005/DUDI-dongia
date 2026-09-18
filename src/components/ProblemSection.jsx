@@ -131,16 +131,16 @@ export function ProblemSection() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .problem-orbit-section {
-          padding-top: 6px;
-          padding-bottom: 6px;
+          padding-top: clamp(6px, 1vh, 16px);
+          padding-bottom: clamp(6px, 1vh, 16px);
         }
 
         .problem-tri-layout {
           display: grid;
-          grid-template-columns: 240px 1fr 240px;
-          gap: 16px;
+          grid-template-columns: clamp(270px, 22vw, 360px) 1fr clamp(270px, 22vw, 360px);
+          gap: clamp(20px, 2.5vw, 48px);
           align-items: center;
-          margin-top: 4px;
+          margin-top: clamp(6px, 1vh, 14px);
           position: relative;
         }
 
@@ -148,12 +148,12 @@ export function ProblemSection() {
         .impact-col {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: clamp(10px, 1.4vh, 18px);
           z-index: 3;
         }
 
         .col-header-tag {
-          font-size: 0.7rem;
+          font-size: clamp(0.7rem, 0.78vw, 0.84rem);
           font-weight: 800;
           letter-spacing: 0.8px;
           color: #475569;
@@ -164,8 +164,8 @@ export function ProblemSection() {
         }
 
         .bullet-dot {
-          width: 6px;
-          height: 6px;
+          width: 7px;
+          height: 7px;
           border-radius: 50%;
           display: inline-block;
         }
@@ -175,8 +175,8 @@ export function ProblemSection() {
         .impact-card {
           background: #ffffff;
           border: 1px solid rgba(226, 232, 240, 0.9);
-          border-radius: 12px;
-          padding: 10px 12px;
+          border-radius: var(--radius-md);
+          padding: clamp(12px, 1.5vh, 18px) clamp(14px, 1.2vw, 20px);
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
           transition: all 0.25s ease;
         }
@@ -191,16 +191,16 @@ export function ProblemSection() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 6px;
+          margin-bottom: clamp(6px, 0.8vh, 10px);
         }
 
         .impact-icon {
-          width: 26px;
-          height: 26px;
-          border-radius: 6px;
+          width: clamp(26px, 2vw, 34px);
+          height: clamp(26px, 2vw, 34px);
+          border-radius: 8px;
           display: flex;
           align-items: center;
-          justifyContent: center;
+          justify-content: center;
         }
 
         .red-icon { background: rgba(239, 68, 68, 0.1); color: #EF4444; }
@@ -209,9 +209,9 @@ export function ProblemSection() {
         .purple-icon { background: rgba(168, 85, 247, 0.1); color: #A855F7; }
 
         .impact-stat-badge {
-          font-size: 0.65rem;
+          font-size: clamp(0.65rem, 0.72vw, 0.78rem);
           font-weight: 700;
-          padding: 2px 7px;
+          padding: 3px 9px;
           border-radius: 20px;
         }
 
@@ -221,17 +221,17 @@ export function ProblemSection() {
         .purple-badge { background: #FAF5FF; color: #9333EA; border: 1px solid #E9D5FF; }
 
         .impact-title {
-          font-size: 0.82rem;
+          font-size: clamp(0.85rem, 0.95vw, 1.05rem);
           font-weight: 700;
           color: #0F172A;
-          margin: 0 0 3px 0;
+          margin: 0 0 4px 0;
           line-height: 1.25;
         }
 
         .impact-desc {
-          font-size: 0.7rem;
+          font-size: clamp(0.72rem, 0.82vw, 0.9rem);
           color: #64748B;
-          line-height: 1.35;
+          line-height: 1.45;
           margin: 0;
         }
 
@@ -241,13 +241,13 @@ export function ProblemSection() {
           align-items: center;
           justify-content: center;
           position: relative;
-          min-height: 310px;
+          min-height: clamp(320px, 36vh, 440px);
         }
 
         .orbit-wheel {
           position: relative;
-          width: 320px;
-          height: 310px;
+          width: clamp(340px, 26vw, 440px);
+          height: clamp(320px, 35vh, 420px);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -255,8 +255,8 @@ export function ProblemSection() {
 
         .orbit-dashed-track {
           position: absolute;
-          width: 220px;
-          height: 220px;
+          width: clamp(240px, 18vw, 310px);
+          height: clamp(240px, 18vw, 310px);
           border-radius: 50%;
           border: 2px dashed #EF4444;
           opacity: 0.85;
@@ -270,8 +270,8 @@ export function ProblemSection() {
 
         .center-robot-head {
           position: relative;
-          width: 126px;
-          height: 126px;
+          width: clamp(136px, 10vw, 175px);
+          height: clamp(136px, 10vw, 175px);
           z-index: 2;
           display: flex;
           align-items: center;
@@ -286,8 +286,8 @@ export function ProblemSection() {
 
         .robot-glow-back {
           position: absolute;
-          width: 144px;
-          height: 144px;
+          width: clamp(150px, 12vw, 200px);
+          height: clamp(150px, 12vw, 200px);
           border-radius: 50%;
           background: radial-gradient(circle, rgba(239, 68, 68, 0.28) 0%, rgba(239, 68, 68, 0.06) 60%, transparent 80%);
           filter: blur(10px);
@@ -301,7 +301,7 @@ export function ProblemSection() {
           filter: drop-shadow(0 8px 16px rgba(239, 68, 68, 0.25));
         }
 
-        /* 6 Orbit Anchors placed EXACTLY along circular ring (R = 110px) */
+        /* 6 Orbit Anchors placed along circular ring */
         .orbit-node-anchor {
           position: absolute;
           top: 50%;
@@ -316,9 +316,9 @@ export function ProblemSection() {
         }
 
         .orbit-badge-num {
-          width: 28px;
-          height: 28px;
-          min-width: 28px;
+          width: clamp(28px, 2vw, 34px);
+          height: clamp(28px, 2vw, 34px);
+          min-width: clamp(28px, 2vw, 34px);
           border-radius: 50%;
           background: #EF4444;
           border: 2px solid #ffffff;
@@ -336,7 +336,7 @@ export function ProblemSection() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.72rem;
+          font-size: clamp(0.72rem, 0.78vw, 0.85rem);
           font-weight: 800;
           line-height: 1;
           text-align: center;
@@ -350,10 +350,10 @@ export function ProblemSection() {
           background: #ffffff;
           border: 1px solid #E2E8F0;
           color: #1E293B;
-          font-size: 0.72rem;
+          font-size: clamp(0.72rem, 0.8vw, 0.88rem);
           font-weight: 600;
-          padding: 4px 10px;
-          border-radius: 14px;
+          padding: clamp(4px, 0.6vh, 7px) clamp(10px, 0.9vw, 15px);
+          border-radius: 16px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           user-select: none;
@@ -374,40 +374,34 @@ export function ProblemSection() {
           box-shadow: 0 6px 16px rgba(239, 68, 68, 0.2), 0 2px 6px rgba(0, 0, 0, 0.06);
         }
 
-        /* Exact Mathematical Trigonometry on Circle R = 110px (Badge radius = 14px) */
-        /* 01: Top (x = 0, y = -110px) */
+        /* Exact Mathematical Trigonometry on Circle */
         .pos-top {
-          transform: translate(-14px, -124px);
+          transform: translate(-14px, -130px);
           flex-direction: row;
         }
 
-        /* 02: Top-Right (x = +95px, y = -55px) */
         .pos-top-right {
-          transform: translate(81px, -69px);
+          transform: translate(90px, -74px);
           flex-direction: row;
         }
 
-        /* 03: Bottom-Right (x = +95px, y = +55px) */
         .pos-bottom-right {
-          transform: translate(81px, 41px);
+          transform: translate(90px, 46px);
           flex-direction: row;
         }
 
-        /* 04: Bottom (x = 0, y = +110px) */
         .pos-bottom {
-          transform: translate(-14px, 96px);
+          transform: translate(-14px, 104px);
           flex-direction: row;
         }
 
-        /* 05: Bottom-Left (x = -95px, y = +55px) */
         .pos-bottom-left {
-          transform: translate(calc(-100% + 14px - 95px), 41px);
+          transform: translate(calc(-100% + 14px - 100px), 46px);
           flex-direction: row-reverse;
         }
 
-        /* 06: Top-Left (x = -95px, y = -55px) */
         .pos-top-left {
-          transform: translate(calc(-100% + 14px - 95px), -69px);
+          transform: translate(calc(-100% + 14px - 100px), -74px);
           flex-direction: row-reverse;
         }
 

@@ -173,7 +173,7 @@ export function LeadForm({ selectedRole, onSelectRole }) {
   return (
     <SectionWrapper id="s11-form" className="lead-form-section">
       <div className="lead-form-layout">
-        {/* Left column: Context & Roles checkboxes */}
+        {/* Left column: Context */}
         <div style={styles.infoSide}>
           <div>
             <div className="section-tag" style={styles.badge}>
@@ -185,11 +185,15 @@ export function LeadForm({ selectedRole, onSelectRole }) {
               DUDI sẽ đánh giá yêu cầu chuyên môn, xác nhận vai trò và gửi bảng ước lượng số giờ cùng mức giá phù hợp nhất.
             </p>
           </div>
+        </div>
 
-          <div>
-            <div style={styles.rolesTitle}>
-              Vai trò cần thuê:
-            </div>
+        {/* Right column: Form fields */}
+        <form onSubmit={handleSubmit} style={styles.formBox}>
+          {/* Vai trò cần thuê (Moved inside form) */}
+          <div style={styles.group}>
+            <label style={styles.label}>
+              Vai trò cần thuê <span style={{ color: '#FEF08A' }}>*</span>
+            </label>
             <div className="lead-roles-grid">
               {[
                 { id: "junior-developer", label: "Junior Dev" },
@@ -204,7 +208,7 @@ export function LeadForm({ selectedRole, onSelectRole }) {
                     key={role.id}
                     style={{
                       ...styles.roleLabel,
-                      background: isChecked ? '#FFFFFF' : '#FFFFFF',
+                      background: '#FFFFFF',
                       border: isChecked ? '2px solid #DC2626' : '1.5px solid #E2E8F0',
                       boxShadow: isChecked ? '0 4px 12px rgba(0, 0, 0, 0.25)' : '0 2px 6px rgba(0, 0, 0, 0.1)'
                     }}
@@ -222,7 +226,7 @@ export function LeadForm({ selectedRole, onSelectRole }) {
                     />
                     <span style={{
                       color: isChecked ? '#991B1B' : '#0F172A',
-                      fontWeight: isChecked ? 700 : 600,
+                      fontWeight: isChecked ? 800 : 600,
                       fontSize: '0.84rem'
                     }}>
                       {role.label}
@@ -231,15 +235,7 @@ export function LeadForm({ selectedRole, onSelectRole }) {
                 );
               })}
             </div>
-
-            <div style={styles.disclaimer}>
-              * Khoảng giá là tham khảo trước khi gửi. Báo giá cuối cùng do người phụ trách DUDI xác nhận dựa trên backlog thực tế. Vui lòng không gửi mã nguồn, mật khẩu hoặc dữ liệu nhạy cảm qua biểu mẫu này.
-            </div>
           </div>
-        </div>
-
-        {/* Right column: Form fields */}
-        <form onSubmit={handleSubmit} style={styles.formBox}>
           <div className="lead-row2">
             <div style={styles.group}>
               <label htmlFor="fullname" style={styles.label}>Họ và tên <span style={{ color: '#FEF08A' }}>*</span></label>
@@ -378,44 +374,33 @@ export function LeadForm({ selectedRole, onSelectRole }) {
       <style dangerouslySetInnerHTML={{ __html: `
         .lead-form-layout {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 24px;
-          background: linear-gradient(135deg, #EE2D2A 0%, #D81E1C 100%);
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          border-radius: var(--radius-lg);
-          padding: 20px 24px;
-          box-shadow: 0 18px 45px rgba(234, 40, 36, 0.28);
+          grid-template-columns: 1fr 1.35fr;
+          gap: clamp(24px, 3.5vw, 54px);
+          align-items: center;
           width: 100%;
         }
 
         .lead-roles-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 6px;
-          margin-bottom: 10px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: clamp(8px, 0.8vw, 12px);
+          margin-bottom: clamp(10px, 1.2vh, 18px);
         }
 
         .lead-row2 {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 8px;
+          gap: clamp(10px, 1.2vw, 18px);
         }
 
         @media (max-width: 900px) {
           .lead-form-layout {
             grid-template-columns: 1fr;
-            gap: 18px;
-            padding: 18px 16px;
-          }
-        }
-
-        @media (max-width: 540px) {
-          .lead-roles-grid {
-            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
           }
           .lead-row2 {
             grid-template-columns: 1fr;
-            gap: 8px;
+            gap: 12px;
           }
         }
       `}} />
@@ -427,102 +412,142 @@ const styles = {
   infoSide: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '12px',
-    justifyContent: 'space-between'
+    justifyContent: 'center',
+    gap: 'clamp(14px, 1.8vh, 24px)'
   },
   badge: {
-    background: '#FFFFFF',
-    borderColor: '#FFFFFF',
-    color: '#D81E1C',
-    fontWeight: 800,
-    marginBottom: '6px',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.12)'
+    background: 'rgba(220, 38, 38, 0.1)',
+    borderColor: 'rgba(220, 38, 38, 0.4)',
+    color: '#DC2626',
+    marginBottom: '8px'
   },
   leftTitle: {
-    fontSize: 'clamp(1.2rem, 1.8vw, 1.45rem)',
-    color: '#FFFFFF',
-    fontWeight: 900,
-    lineHeight: 1.2,
-    marginBottom: '4px'
+    fontSize: 'clamp(1.4rem, 2.2vw, 2.3rem)',
+    fontWeight: 800,
+    color: '#0F172A',
+    marginBottom: '8px',
+    lineHeight: 1.25
   },
   leftDesc: {
-    fontSize: '0.8rem',
-    color: '#FFF1F1',
-    lineHeight: 1.45
+    fontSize: 'clamp(0.85rem, 0.95vw, 1.05rem)',
+    color: 'var(--text-body)',
+    lineHeight: 1.55,
+    marginBottom: 'clamp(8px, 1.2vh, 14px)'
   },
-  rolesTitle: {
-    fontSize: '0.8rem',
-    fontWeight: 800,
-    color: '#FFFFFF',
-    marginBottom: '6px'
+  benefitList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'clamp(10px, 1.3vh, 16px)',
+    margin: 'clamp(8px, 1vh, 14px) 0'
   },
-  roleLabel: {
+  benefitItem: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '12px',
+    padding: '10px 14px',
+    borderRadius: '12px',
+    background: '#FFFFFF',
+    border: '1px solid #E2E8F0',
+    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.03)'
+  },
+  benefitIcon: {
+    width: '32px',
+    height: '32px',
+    borderRadius: '8px',
+    background: 'rgba(220, 38, 38, 0.08)',
     display: 'flex',
     alignItems: 'center',
-    gap: '6px',
-    padding: '6px 8px',
-    borderRadius: 'var(--radius-sm)',
+    justifyContent: 'center',
+    flexShrink: 0,
+    marginTop: '2px'
+  },
+  benefitTitle: {
+    fontSize: 'clamp(0.84rem, 0.9vw, 0.94rem)',
+    fontWeight: 700,
+    color: '#0F172A',
+    display: 'block',
+    marginBottom: '2px'
+  },
+  benefitDesc: {
+    fontSize: 'clamp(0.76rem, 0.82vw, 0.86rem)',
+    color: '#64748B',
+    lineHeight: 1.4,
+    margin: 0
+  },
+  roleLabel: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: 'clamp(8px, 1vh, 12px) clamp(12px, 1.1vw, 16px)',
+    borderRadius: '10px',
     cursor: 'pointer',
     transition: 'all 0.2s ease',
     userSelect: 'none'
   },
   disclaimer: {
-    fontSize: '0.68rem',
-    color: '#FECACA',
-    lineHeight: 1.4
+    fontSize: 'clamp(0.72rem, 0.78vw, 0.84rem)',
+    color: 'var(--text-muted)',
+    lineHeight: 1.45,
+    marginTop: '6px'
   },
   formBox: {
+    background: 'linear-gradient(135deg, #DC2626 0%, #991B1B 100%)',
+    borderRadius: 'var(--radius-xl)',
+    padding: 'clamp(20px, 2.5vh, 36px) clamp(20px, 2vw, 36px)',
+    boxShadow: '0 20px 48px rgba(220, 38, 38, 0.28), 0 4px 14px rgba(0, 0, 0, 0.08)',
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px'
+    gap: 'clamp(10px, 1.3vh, 16px)',
+    border: '1px solid rgba(255, 255, 255, 0.2)'
   },
   group: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    gap: '5px'
   },
   label: {
-    fontSize: '0.72rem',
+    fontSize: 'clamp(0.76rem, 0.84vw, 0.92rem)',
     fontWeight: 700,
-    color: '#FFFFFF',
-    marginBottom: '2px'
+    color: '#FFFFFF'
   },
   input: {
-    width: '100%',
-    padding: '7px 10px',
+    padding: 'clamp(9px, 1.2vh, 14px) clamp(12px, 1vw, 16px)',
     borderRadius: 'var(--radius-sm)',
-    background: '#FFFFFF',
-    border: '1px solid #CBD5E1',
+    border: '1px solid rgba(255, 255, 255, 0.35)',
+    background: 'rgba(255, 255, 255, 0.95)',
     color: '#0F172A',
-    fontSize: '0.82rem',
+    fontSize: 'clamp(0.82rem, 0.9vw, 0.96rem)',
     outline: 'none',
-    boxShadow: '0 1px 4px rgba(0, 0, 0, 0.05)'
+    width: '100%',
+    boxSizing: 'border-box'
   },
   select: {
-    width: '100%',
-    padding: '7px 10px',
+    padding: 'clamp(9px, 1.2vh, 14px) clamp(12px, 1vw, 16px)',
     borderRadius: 'var(--radius-sm)',
-    background: '#FFFFFF',
-    border: '1px solid #CBD5E1',
+    border: '1px solid rgba(255, 255, 255, 0.35)',
+    background: 'rgba(255, 255, 255, 0.95)',
     color: '#0F172A',
-    fontSize: '0.82rem',
+    fontSize: 'clamp(0.82rem, 0.9vw, 0.96rem)',
     outline: 'none',
-    boxShadow: '0 1px 4px rgba(0, 0, 0, 0.05)'
+    width: '100%',
+    cursor: 'pointer',
+    boxSizing: 'border-box'
   },
   textarea: {
-    width: '100%',
-    padding: '7px 10px',
+    padding: 'clamp(10px, 1.2vh, 14px) clamp(12px, 1vw, 16px)',
     borderRadius: 'var(--radius-sm)',
-    background: '#FFFFFF',
-    border: '1px solid #CBD5E1',
+    border: '1px solid rgba(255, 255, 255, 0.35)',
+    background: 'rgba(255, 255, 255, 0.95)',
     color: '#0F172A',
-    fontSize: '0.82rem',
+    fontSize: 'clamp(0.82rem, 0.9vw, 0.96rem)',
     outline: 'none',
-    resize: 'none',
-    boxShadow: '0 1px 4px rgba(0, 0, 0, 0.05)'
+    width: '100%',
+    resize: 'vertical',
+    fontFamily: 'inherit',
+    boxSizing: 'border-box'
   },
   submitBtn: {
-    width: '100%',
-    padding: '10px 18px',
+    padding: 'clamp(11px, 1.4vh, 16px) 24px',
     borderRadius: 'var(--radius-md)',
     background: '#0F172A',
     color: '#FFFFFF',

@@ -23,11 +23,12 @@ export function FAQSection() {
           return (
             <div
               key={faq.id}
+              className={`faq-accordion-card ${isOpen ? 'is-active' : ''}`}
               style={{
                 ...styles.item,
-                borderColor: isOpen ? 'var(--border-red-bright)' : 'var(--border-glass)',
-                background: isOpen ? '#FFF8F8' : '#FFFFFF',
-                boxShadow: 'var(--shadow-sm)'
+                borderColor: isOpen ? '#E52E2E' : '#E2E8F0',
+                background: isOpen ? '#FFFBFB' : '#FFFFFF',
+                boxShadow: isOpen ? '0 4px 16px rgba(229, 46, 46, 0.08)' : '0 1px 3px rgba(0, 0, 0, 0.03)'
               }}
             >
               <button
@@ -39,9 +40,9 @@ export function FAQSection() {
                 <span>{faq.question}</span>
                 <span
                   style={{
-                    color: 'var(--dudi-red-bright)',
+                    color: isOpen ? '#E52E2E' : '#94A3B8',
                     transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                    transition: 'transform 0.2s ease'
+                    transition: 'transform 0.25s ease, color 0.25s ease'
                   }}
                 >
                   ▼
@@ -68,6 +69,20 @@ export function FAQSection() {
           );
         })}
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .faq-accordion-card {
+          border: 1px solid #E2E8F0;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-accordion-card:hover {
+          border-color: #CBD5E1;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04) !important;
+        }
+        .faq-accordion-card.is-active {
+          border-color: #E52E2E !important;
+        }
+      `}} />
     </SectionWrapper>
   );
 }
@@ -76,35 +91,33 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '7px',
-    maxWidth: '860px',
+    gap: 'clamp(10px, 1.2vh, 14px)',
+    maxWidth: 'clamp(860px, 68vw, 1100px)',
     margin: '0 auto',
     width: '100%'
   },
   item: {
-    border: '1px solid',
     borderRadius: 'var(--radius-md)',
-    overflow: 'hidden',
-    transition: 'all 0.2s ease'
+    overflow: 'hidden'
   },
   questionBtn: {
     width: '100%',
-    padding: '10px 14px',
+    padding: 'clamp(13px, 1.5vh, 18px) clamp(18px, 1.6vw, 24px)',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     background: 'transparent',
     border: 'none',
-    color: 'var(--text-pure)',
-    fontWeight: 600,
-    fontSize: '0.86rem',
+    color: '#0F172A',
+    fontWeight: 700,
+    fontSize: 'clamp(0.88rem, 1vw, 1.05rem)',
     cursor: 'pointer',
     textAlign: 'left'
   },
   answerText: {
-    padding: '0 14px 10px 14px',
-    color: 'var(--text-body)',
-    fontSize: '0.8rem',
-    lineHeight: 1.5
+    padding: '0 clamp(18px, 1.6vw, 24px) clamp(14px, 1.5vh, 18px) clamp(18px, 1.6vw, 24px)',
+    color: '#475569',
+    fontSize: 'clamp(0.82rem, 0.92vw, 0.96rem)',
+    lineHeight: 1.6
   }
 };

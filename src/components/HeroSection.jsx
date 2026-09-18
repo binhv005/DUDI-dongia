@@ -45,15 +45,15 @@ export function HeroSection({ onNavigate }) {
       <style dangerouslySetInnerHTML={{ __html: `
         .hero-grid {
           display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
-          gap: 30px;
+          grid-template-columns: 1.25fr 0.95fr;
+          gap: clamp(30px, 4vw, 64px);
           align-items: center;
           width: 100%;
           min-height: 80%;
         }
 
         .hero-visual-spacer {
-          min-height: 340px;
+          min-height: clamp(340px, 40vh, 520px);
         }
 
         @media (max-width: 960px) {
@@ -93,19 +93,19 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: '0.85rem',
+    gap: 'clamp(0.85rem, 1.4vh, 1.35rem)',
     zIndex: 2,
-    maxWidth: '640px'
+    maxWidth: 'clamp(640px, 46vw, 820px)'
   },
   title: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '2px',
+    gap: '4px',
     lineHeight: 1.1
   },
   titlePrefix: {
     fontFamily: 'var(--font-sans)',
-    fontSize: '0.95rem',
+    fontSize: 'clamp(0.95rem, 1.1vw, 1.18rem)',
     fontWeight: 800,
     letterSpacing: '2.5px',
     textTransform: 'uppercase',
@@ -115,7 +115,7 @@ const styles = {
   },
   titleScript: {
     fontFamily: 'var(--font-script)',
-    fontSize: 'clamp(3.2rem, 5.5vw, 5.2rem)',
+    fontSize: 'clamp(3.4rem, 6.2vw, 6.4rem)',
     fontWeight: 700,
     color: '#FFFFFF',
     display: 'block',
@@ -126,7 +126,7 @@ const styles = {
   },
   titleSuffix: {
     fontFamily: 'var(--font-sans)',
-    fontSize: 'clamp(1.4rem, 2.4vw, 2.3rem)',
+    fontSize: 'clamp(1.5rem, 2.7vw, 2.9rem)',
     fontWeight: 900,
     letterSpacing: '-0.02em',
     textTransform: 'uppercase',
@@ -136,17 +136,17 @@ const styles = {
     textShadow: '0 2px 8px rgba(0,0,0,0.6)'
   },
   subheading: {
-    fontSize: 'clamp(0.92rem, 1.05vw, 1.05rem)',
+    fontSize: 'clamp(0.95rem, 1.15vw, 1.22rem)',
     color: '#CBD5E1',
-    maxWidth: '560px',
+    maxWidth: 'clamp(560px, 42vw, 700px)',
     lineHeight: 1.6
   },
   actions: {
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
-    gap: '12px',
-    marginTop: '0.4rem',
+    gap: 'clamp(12px, 1.2vw, 18px)',
+    marginTop: 'clamp(0.4rem, 0.8vh, 0.8rem)',
     width: '100%'
   },
   btnSecondaryDark: {

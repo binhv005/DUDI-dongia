@@ -12,13 +12,6 @@ export function Footer() {
         <div className="footer-top-grid">
           {/* Left Column: Company Info */}
           <div style={styles.leftCol}>
-            <div style={styles.brandRow}>
-              <img src="/logo.webp" alt="DUDI Logo" width="34" height="34" style={{ borderRadius: '6px', height: '34px', width: 'auto' }} />
-              <span style={styles.brandText}>
-                DUDI <span style={{ color: '#E52E2E' }}>Software</span>
-              </span>
-            </div>
-
             <div style={styles.companyName}>
               Công ty TNHH Giải Pháp Phần Mềm DUDI
             </div>
@@ -105,16 +98,33 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="footer-bottom-row">
           <div style={styles.copyright}>
-            Copyright © 2026 DUDI Software. All rights reserved.
+            © 2024 CÔNG TY TNHH GIẢI PHÁP PHẦN MỀM DUDI. All rights reserved.
           </div>
 
-          <div style={styles.verifiedBadge}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              <polyline points="9 12 11 14 15 10"></polyline>
+          <a
+            href="https://dudisoftware.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.websiteBadge}
+            className="footer-website-badge"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#E52E2E"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ flexShrink: 0 }}
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
-            <span>Thông tin đăng ký kinh doanh chính thức</span>
-          </div>
+            <span>dudisoftware.com</span>
+          </a>
         </div>
       </div>
 
@@ -122,18 +132,18 @@ export function Footer() {
         .footer-top-grid {
           display: grid;
           grid-template-columns: 1.4fr 1.1fr 1fr;
-          gap: 40px;
+          gap: clamp(30px, 3.5vw, 64px);
           align-items: flex-start;
           width: 100%;
         }
 
         .footer-bottom-row {
           display: flex;
-          justifyContent: space-between;
+          justify-content: space-between;
           align-items: center;
           border-top: 1px solid rgba(255, 255, 255, 0.08);
-          padding-top: 18px;
-          font-size: 0.8rem;
+          padding-top: clamp(14px, 2vh, 22px);
+          font-size: clamp(0.76rem, 0.84vw, 0.9rem);
           color: #64748B;
           width: 100%;
         }
@@ -164,38 +174,31 @@ export function Footer() {
 const styles = {
   footerWrapper: {
     minHeight: 'auto',
-    height: '100svh',
+    height: 'auto',
     background: '#07090E',
     color: '#CBD5E1',
-    borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+    padding: 'clamp(36px, 4.5vh, 52px) clamp(24px, 3.5vw, 56px) clamp(20px, 2.5vh, 28px) clamp(24px, 3.5vw, 56px)'
   },
   container: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    padding: '24px 0 16px 0',
-    height: '100%'
+    justifyContent: 'flex-start',
+    gap: 'clamp(24px, 3vh, 36px)',
+    padding: 0,
+    height: 'auto',
+    maxWidth: 'clamp(1280px, 88vw, 1600px)',
+    margin: '0 auto',
+    width: '100%'
   },
   leftCol: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start'
   },
-  brandRow: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    marginBottom: '16px'
-  },
-  brandText: {
-    fontSize: '1.25rem',
-    fontWeight: 800,
-    color: '#FFFFFF',
-    letterSpacing: '0.5px'
-  },
   companyName: {
-    fontSize: '0.98rem',
-    fontWeight: 700,
+    fontSize: 'clamp(1rem, 1.15vw, 1.25rem)',
+    fontWeight: 800,
     color: '#FFFFFF',
     marginBottom: '8px'
   },
@@ -286,13 +289,22 @@ const styles = {
     transition: 'all 0.2s ease'
   },
   copyright: {
-    color: '#64748B'
-  },
-  verifiedBadge: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px',
     color: '#94A3B8',
-    fontSize: '0.8rem'
+    fontSize: 'clamp(0.78rem, 0.86vw, 0.92rem)',
+    fontWeight: 500
+  },
+  websiteBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '6px 14px',
+    borderRadius: 'var(--radius-sm)',
+    background: 'rgba(255, 255, 255, 0.05)',
+    border: '1px solid rgba(255, 255, 255, 0.14)',
+    color: '#E2E8F0',
+    fontSize: 'clamp(0.78rem, 0.86vw, 0.9rem)',
+    fontWeight: 500,
+    textDecoration: 'none',
+    transition: 'all 0.2s ease'
   }
 };

@@ -76,8 +76,9 @@ export function FloatingActions() {
             title="Cuộn lên đầu trang"
             aria-label="Cuộn lên đầu trang"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="18 15 12 9 6 15"></polyline>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F172A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
             </svg>
           </button>
         </div>
@@ -144,11 +145,11 @@ export function FloatingActions() {
 const styles = {
   floatingContainer: {
     position: 'fixed',
-    right: '24px',
-    bottom: '24px',
+    right: 'clamp(18px, 2vw, 32px)',
+    bottom: 'clamp(18px, 2.5vh, 32px)',
     display: 'flex',
     flexDirection: 'column',
-    gap: '12px',
+    gap: 'clamp(10px, 1.2vh, 16px)',
     zIndex: 9999,
     alignItems: 'center'
   },
@@ -158,56 +159,23 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  tooltip: {
-    position: 'absolute',
-    right: '58px',
-    background: 'rgba(10, 14, 24, 0.94)',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    color: '#FFFFFF',
-    fontSize: '0.78rem',
-    fontWeight: 600,
-    padding: '5px 12px',
-    borderRadius: '6px',
-    whiteSpace: 'nowrap',
-    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.35)',
-    pointerEvents: 'none',
-    animation: 'fadeIn 0.18s ease'
-  },
-  toast: {
-    position: 'absolute',
-    right: '58px',
-    bottom: '60px',
-    background: '#0F172A',
-    border: '1px solid #10B981',
-    color: '#FFFFFF',
-    padding: '8px 14px',
-    borderRadius: '8px',
-    fontSize: '0.82rem',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    whiteSpace: 'nowrap',
-    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
-    zIndex: 10000,
-    animation: 'fadeIn 0.2s ease'
-  },
   scrollUpBtn: {
-    width: '42px',
-    height: '42px',
+    width: 'clamp(42px, 3.2vw, 50px)',
+    height: 'clamp(42px, 3.2vw, 50px)',
     borderRadius: '50%',
-    background: 'rgba(25, 30, 45, 0.95)',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+    background: '#FFFFFF',
+    border: '1px solid rgba(0, 0, 0, 0.12)',
+    color: '#0F172A',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)'
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.25)',
+    transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
   },
   phoneBtn: {
-    width: '50px',
-    height: '50px',
+    width: 'clamp(46px, 3.4vw, 54px)',
+    height: 'clamp(46px, 3.4vw, 54px)',
     borderRadius: '50%',
     background: 'linear-gradient(135deg, #FF3B30 0%, #D91B1B 100%)',
     display: 'flex',
@@ -215,11 +183,11 @@ const styles = {
     justifyContent: 'center',
     textDecoration: 'none',
     cursor: 'pointer',
-    transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)'
+    transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
   },
   zaloBtn: {
-    width: '50px',
-    height: '50px',
+    width: 'clamp(46px, 3.4vw, 54px)',
+    height: 'clamp(46px, 3.4vw, 54px)',
     borderRadius: '50%',
     background: 'linear-gradient(135deg, #0088FF 0%, #0066EE 100%)',
     display: 'flex',
@@ -227,6 +195,39 @@ const styles = {
     justifyContent: 'center',
     textDecoration: 'none',
     cursor: 'pointer',
-    transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)'
+    transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+  },
+  tooltip: {
+    position: 'absolute',
+    right: 'calc(100% + 12px)',
+    background: 'rgba(10, 14, 24, 0.94)',
+    backdropFilter: 'blur(10px)',
+    border: '1px solid rgba(255, 255, 255, 0.15)',
+    color: '#FFFFFF',
+    fontSize: 'clamp(0.74rem, 0.8vw, 0.84rem)',
+    fontWeight: 600,
+    padding: '6px 12px',
+    borderRadius: '8px',
+    whiteSpace: 'nowrap',
+    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.35)',
+    pointerEvents: 'none',
+    animation: 'pageFadeIn 0.18s ease'
+  },
+  toast: {
+    position: 'fixed',
+    bottom: 'clamp(80px, 12vh, 120px)',
+    right: 'clamp(18px, 2.5vw, 36px)',
+    background: '#FFFFFF',
+    color: '#0F172A',
+    padding: '10px 18px',
+    borderRadius: '10px',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    fontSize: 'clamp(0.8rem, 0.88vw, 0.92rem)',
+    border: '1px solid #10B981',
+    zIndex: 10000,
+    animation: 'pageFadeIn 0.3s ease'
   }
 };

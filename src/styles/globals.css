@@ -20,10 +20,10 @@ html {
   overflow-x: hidden;
 }
 
-/* Scroll snap on desktop */
+/* Scroll snap disabled for smooth, natural proportional scrolling */
 @media (min-width: 1025px) {
   html {
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none;
   }
 }
 
@@ -34,21 +34,30 @@ body {
   overflow-x: hidden;
 }
 
-/* Global Page Fade-In Transition */
+/* Global Page Fade-In Transition (Opacity only to preserve fixed header viewport context) */
 @keyframes pageFadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .app-root {
-  animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: opacity, transform;
+  animation: pageFadeIn 0.5s ease forwards;
+  position: relative;
+  width: 100%;
+}
+
+/* Fixed Sticky Header */
+.main-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 99999 !important;
 }
 
 /* Subtle Light Grid Overlay */
@@ -71,13 +80,13 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-h1 { font-size: clamp(2.1rem, 3.8vw, 3.4rem); }
-h2 { font-size: clamp(1.6rem, 2.6vw, 2.3rem); }
-h3 { font-size: clamp(1.15rem, 1.8vw, 1.45rem); }
+h1 { font-size: clamp(2.2rem, 3.8vw, 4.2rem); }
+h2 { font-size: clamp(1.65rem, 2.7vw, 2.9rem); }
+h3 { font-size: clamp(1.18rem, 1.8vw, 1.75rem); }
 
 p {
   color: var(--text-body);
-  font-size: clamp(0.9rem, 1.05vw, 1rem);
+  font-size: clamp(0.88rem, 1.05vw, 1.12rem);
   line-height: 1.6;
 }
 
@@ -92,25 +101,26 @@ button, input, select, textarea {
   font-size: inherit;
 }
 
-/* Section Wrapper (1 Viewport = 1 Screen) */
+/* Section Wrapper: Natural, Proportional Spacing (No forced vertical stretching) */
 .section-wrapper {
   position: relative;
   width: 100%;
-  min-height: 100svh;
-  height: 100svh;
-  max-height: 100svh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  min-height: auto;
+  height: auto;
+  max-height: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 58px 20px 14px 20px;
+  padding: clamp(48px, 6.2vh, 72px) clamp(24px, 3.5vw, 56px);
   z-index: 1;
-  overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.section-wrapper.hero-section {
+  min-height: 100svh;
+  padding-top: clamp(80px, 10vh, 108px);
+  padding-bottom: clamp(40px, 5.5vh, 60px);
 }
 
 .section-wrapper::-webkit-scrollbar {
@@ -150,32 +160,36 @@ button, input, select, textarea {
 
 .section-container {
   width: 100%;
-  max-width: 1240px;
+  max-width: clamp(1240px, 88vw, 1560px);
   margin: 0 auto;
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
+  justify-content: flex-start;
+  height: auto;
 }
 
 /* Section Meta Badge */
 .section-meta {
   text-align: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: clamp(1rem, 2vh, 1.85rem);
+}
+
+.section-meta h2 {
+  margin-bottom: clamp(0.35rem, 0.6vh, 0.65rem);
 }
 
 .section-tag {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 3px 10px;
+  gap: 6px;
+  padding: clamp(3px, 0.5vh, 6px) clamp(10px, 0.9vw, 16px);
   border-radius: var(--radius-full);
   background: var(--dudi-red-subtle);
   border: 1px solid var(--border-red);
   color: var(--dudi-red-bright);
-  font-size: 0.72rem;
+  font-size: clamp(0.72rem, 0.8vw, 0.86rem);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -183,19 +197,19 @@ button, input, select, textarea {
 }
 
 .section-tag-dot {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--dudi-red-bright);
   box-shadow: 0 0 6px var(--dudi-red-bright);
 }
 
 .section-desc {
-  max-width: 660px;
-  margin: 0.2rem auto 0;
-  font-size: 0.85rem;
+  max-width: clamp(660px, 50vw, 840px);
+  margin: 0.25rem auto 0;
+  font-size: clamp(0.85rem, 1vw, 1.05rem);
   color: var(--text-body);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 /* Buttons */
@@ -203,11 +217,11 @@ button, input, select, textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   font-weight: 600;
   border-radius: var(--radius-md);
-  padding: 10px 22px;
-  font-size: 0.92rem;
+  padding: clamp(10px, 1.2vh, 14px) clamp(20px, 1.6vw, 30px);
+  font-size: clamp(0.9rem, 0.95vw, 1.05rem);
   cursor: pointer;
   border: 1px solid transparent;
   transition: all var(--transition-fast);
@@ -250,8 +264,8 @@ button, input, select, textarea {
 }
 
 .btn-sm {
-  padding: 6px 14px;
-  font-size: 0.82rem;
+  padding: clamp(6px, 0.8vh, 10px) clamp(14px, 1.1vw, 20px);
+  font-size: clamp(0.8rem, 0.85vw, 0.92rem);
   border-radius: var(--radius-sm);
 }
 

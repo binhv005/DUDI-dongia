@@ -134,22 +134,28 @@ export function CaseSection() {
         .cases-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-          margin-top: 8px;
+          gap: clamp(22px, 2.5vw, 40px);
+          margin-top: clamp(8px, 1.2vh, 16px);
+          width: 100%;
         }
 
         .case-card {
           position: relative;
           background: linear-gradient(135deg, #FF2D55 0%, #E11D48 45%, #BE123C 100%);
           border: 1px solid rgba(255, 255, 255, 0.25);
-          border-radius: 20px;
-          padding: 18px 20px;
+          border-radius: clamp(16px, 1.6vw, 24px);
+          padding: clamp(18px, 2.4vh, 30px) clamp(18px, 2vw, 30px);
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: clamp(10px, 1.4vh, 18px);
           box-shadow: 0 12px 32px rgba(225, 29, 72, 0.28), 0 2px 8px rgba(0, 0, 0, 0.08);
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           overflow: hidden;
+        }
+
+        .case-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 48px rgba(225, 29, 72, 0.42), 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .case-top-accent {
@@ -158,44 +164,27 @@ export function CaseSection() {
           left: 0;
           right: 0;
           height: 3px;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
-          opacity: 0;
-          transition: opacity 0.3s ease;
+          background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0.2) 100%);
         }
 
-        .case-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 18px 40px rgba(225, 29, 72, 0.38), 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
-
-        .case-card:hover .case-top-accent {
-          opacity: 1;
-        }
-
-        /* Header & Robot Avatar */
         .case-header {
           display: flex;
           align-items: center;
-          justifyContent: space-between;
-          gap: 10px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-          padding-bottom: 10px;
+          justify-content: space-between;
+          gap: 12px;
         }
 
         .case-header-left {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: clamp(10px, 1vw, 16px);
         }
 
         .card-mascot-wrap {
           position: relative;
-          width: 40px;
-          height: 40px;
-          min-width: 40px;
-          display: flex;
-          align-items: center;
-          justifyContent: center;
+          width: clamp(38px, 3vw, 50px);
+          height: clamp(38px, 3vw, 50px);
+          flex-shrink: 0;
         }
 
         .card-robot-head-img {

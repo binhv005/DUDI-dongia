@@ -380,52 +380,55 @@ const styles = {
     justifyContent: 'flex-start'
   },
   descText: {
-    fontSize: '0.72rem',
-    lineHeight: 1.4,
-    color: '#0F172A',
+    fontSize: 'clamp(0.74rem, 0.84vw, 0.92rem)',
     fontWeight: 600,
     margin: '0',
-    padding: '4px 10px',
+    padding: 'clamp(6px, 1vh, 12px) clamp(10px, 1vw, 16px)',
     background: 'rgba(255, 255, 255, 0.94)',
     backdropFilter: 'blur(6px)',
     WebkitBackdropFilter: 'blur(6px)',
-    borderRadius: '6px',
+    borderRadius: '10px',
     boxShadow: '0 2px 6px rgba(0, 0, 0, 0.06)',
     border: '1px solid rgba(255, 255, 255, 0.8)',
+    color: '#334155',
     textAlign: 'center',
-    whiteSpace: 'nowrap'
+    lineHeight: 1.4,
+    width: 'clamp(160px, 13vw, 215px)',
+    whiteSpace: 'normal',
+    transition: 'all 0.3s ease'
   },
   pinContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '2px 0'
+    gap: '2px'
   },
   pinLine: {
     width: '2px',
-    height: '24px'
+    height: 'clamp(12px, 1.5vh, 20px)',
+    opacity: 0.85
   },
   pinDot: {
-    width: '7px',
-    height: '7px',
+    width: '6px',
+    height: '6px',
     borderRadius: '50%'
   },
   circleContainer: {
-    padding: '2px 0',
-    zIndex: 2
+    position: 'relative',
+    zIndex: 5,
+    margin: 'clamp(4px, 0.6vh, 8px) 0'
   },
   circleOuterRing: {
-    width: '88px',
-    height: '88px',
+    width: 'clamp(104px, 7.6vw, 138px)',
+    height: 'clamp(104px, 7.6vw, 138px)',
     borderRadius: '50%',
-    padding: '3.5px',
     border: '3px solid',
     background: '#FFFFFF',
+    padding: 'clamp(4px, 0.4vw, 6px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-    cursor: 'pointer'
+    transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
   },
   circleInner: {
     width: '100%',
@@ -436,24 +439,22 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     color: '#FFFFFF',
-    padding: '2px',
-    boxShadow: 'inset 0 2px 3px rgba(255, 255, 255, 0.3), inset 0 -2px 3px rgba(0, 0, 0, 0.2)'
+    boxShadow: 'inset 0 2px 6px rgba(0, 0, 0, 0.25)'
   },
   circleNum: {
     fontFamily: 'var(--font-sans)',
-    fontSize: '1.15rem',
+    fontSize: 'clamp(1.4rem, 1.8vw, 2.1rem)',
     fontWeight: 900,
-    lineHeight: 1.1,
-    letterSpacing: '-0.5px'
+    lineHeight: 1,
+    letterSpacing: '-0.03em',
+    marginBottom: '2px'
   },
   circleLabel: {
-    fontSize: '0.54rem',
+    fontSize: 'clamp(0.68rem, 0.78vw, 0.88rem)',
     fontWeight: 800,
-    letterSpacing: '0.3px',
+    letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    marginTop: '1px',
-    textAlign: 'center',
-    maxWidth: '76px'
+    opacity: 0.95
   },
   ruleBanner: {
     display: 'flex',

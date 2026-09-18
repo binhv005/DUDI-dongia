@@ -72,14 +72,14 @@ export function PricingExplorer({ selectedRole, onSelectRole, onNavigate }) {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .pricing-notice-box {
-          padding: 10px 16px;
+          padding: clamp(12px, 1.5vh, 18px) clamp(16px, 1.6vw, 28px);
           border-radius: var(--radius-md);
           background: #FFFFFF;
           border: 1px solid var(--border-glass);
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 12px;
+          gap: clamp(12px, 1.5vw, 24px);
           box-shadow: var(--shadow-sm);
         }
 
@@ -102,63 +102,49 @@ const styles = {
   explorer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
+    gap: 'clamp(14px, 1.6vh, 22px)',
     width: '100%',
     overflow: 'hidden'
   },
-  card: {
-    width: '260px',
-    minWidth: '260px',
-    maxWidth: '260px',
-    borderRadius: 'var(--radius-lg)',
-    border: '1px solid',
-    padding: '14px 12px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    cursor: 'pointer',
-    position: 'relative',
-    userSelect: 'none'
-  },
   selectedBadge: {
     position: 'absolute',
-    top: '6px',
-    right: '6px',
-    fontSize: '0.62rem',
+    top: '8px',
+    right: '8px',
+    fontSize: 'clamp(0.62rem, 0.7vw, 0.74rem)',
     fontWeight: 800,
     color: 'var(--dudi-red-bright)',
     background: 'var(--dudi-red-subtle)',
-    padding: '2px 5px',
-    borderRadius: '4px',
+    padding: '3px 7px',
+    borderRadius: '6px',
     border: '1px solid var(--border-red)'
   },
   roleName: {
-    fontSize: '0.88rem',
+    fontSize: 'clamp(0.92rem, 1.05vw, 1.12rem)',
     fontWeight: 700,
     color: 'var(--text-pure)',
-    marginBottom: '2px'
+    marginBottom: '3px'
   },
   rolePrice: {
-    fontSize: '1.05rem',
+    fontSize: 'clamp(1.15rem, 1.35vw, 1.5rem)',
     fontWeight: 900,
     color: 'var(--dudi-red-bright)',
-    marginBottom: '1px'
+    marginBottom: '2px'
   },
   roleUnit: {
-    fontSize: '0.7rem',
+    fontSize: 'clamp(0.72rem, 0.8vw, 0.84rem)',
     color: 'var(--text-muted)',
-    marginBottom: '6px'
+    marginBottom: '8px'
   },
   roleDesc: {
-    fontSize: '0.75rem',
+    fontSize: 'clamp(0.76rem, 0.85vw, 0.92rem)',
     color: 'var(--text-body)',
-    lineHeight: 1.4,
-    marginBottom: '10px'
+    lineHeight: 1.45,
+    marginBottom: '12px'
   },
   selectBtn: {
     width: '100%',
-    padding: '6px 0',
-    fontSize: '0.78rem',
+    padding: 'clamp(7px, 1vh, 11px) 0',
+    fontSize: 'clamp(0.8rem, 0.88vw, 0.94rem)',
     fontWeight: 700,
     borderRadius: 'var(--radius-sm)',
     border: '1px solid var(--border-glass)',
@@ -168,8 +154,8 @@ const styles = {
     transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
   },
   noticeText: {
-    fontSize: '0.78rem',
+    fontSize: 'clamp(0.8rem, 0.9vw, 0.96rem)',
     color: 'var(--text-body)',
-    lineHeight: 1.4
+    lineHeight: 1.45
   }
 };

@@ -5,8 +5,18 @@ export function Header({ onNavigate }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef(null);
   const closeTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNavClick = (id) => {
     onNavigate(id);
@@ -47,7 +57,15 @@ export function Header({ onNavigate }) {
   }, []);
 
   return (
-    <header className="main-header" id="s01-header" style={styles.header}>
+    <header
+      className={`main-header ${isScrolled ? 'is-scrolled' : ''}`}
+      id="s01-header"
+      style={{
+        ...styles.header,
+        boxShadow: isScrolled ? '0 8px 30px rgba(0, 0, 0, 0.08)' : '0 1px 4px rgba(0, 0, 0, 0.02)',
+        borderBottomColor: isScrolled ? 'rgba(226, 232, 240, 0.9)' : 'var(--border-glass)'
+      }}
+    >
       <div className="header-container" style={styles.container}>
         <a
           href="#s02-hero"
@@ -55,11 +73,15 @@ export function Header({ onNavigate }) {
           style={styles.logoLink}
           aria-label="DUDI Software Trang chủ"
         >
-          <img src="/logo.webp" alt="DUDI Software Logo" width="34" height="34" style={{ height: '34px', width: 'auto', borderRadius: '6px' }} />
-          <span style={{ fontSize: '1.2rem', fontWeight: 900, letterSpacing: '0.5px', color: '#E52E2E', marginLeft: '8px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span>DUDI</span>
-            <span className="brand-suffix" style={{ color: '#E52E2E', fontSize: '0.82rem', fontWeight: 800, letterSpacing: '1.5px' }}>SOFTWARE</span>
-          </span>
+          <div className="brand-logo-container" style={styles.brandContainer}>
+            <div className="brand-logo-main-row" style={styles.brandMainRow}>
+              <span style={styles.brandDudi}>DUDI</span>
+              <span style={styles.brandSoftware}>SOFTWARE</span>
+            </div>
+            <div className="brand-logo-tagline" style={styles.brandTagline}>
+              TECHNOLOGY SOLUTIONS HUB
+            </div>
+          </div>
         </a>
 
         {/* Desktop Nav */}
@@ -311,36 +333,76 @@ const styles = {
     top: 0,
     left: 0,
     right: 0,
-    height: '64px',
+    height: 'clamp(64px, 5vh, 74px)',
     background: 'var(--bg-glass-strong)',
     backdropFilter: 'blur(16px)',
     WebkitBackdropFilter: 'blur(16px)',
     borderBottom: '1px solid var(--border-glass)',
-    zIndex: 1000,
+    zIndex: 99999,
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    transition: 'box-shadow 0.25s ease, border-color 0.25s ease'
   },
   container: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    maxWidth: '1280px',
+    maxWidth: 'clamp(1280px, 88vw, 1600px)',
     margin: '0 auto',
-    padding: '0 24px'
+    padding: '0 clamp(16px, 2.5vw, 36px)'
   },
   logoLink: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    textDecoration: 'none'
+  },
+  brandContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    lineHeight: 1
+  },
+  brandMainRow: {
+    display: 'inline-flex',
+    alignItems: 'baseline',
+    gap: '6px'
+  },
+  brandDudi: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: 'clamp(1.2rem, 1.4vw, 1.5rem)',
+    fontWeight: 900,
+    letterSpacing: '-0.02em',
+    color: '#0F172A',
+    lineHeight: 1
+  },
+  brandSoftware: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: 'clamp(1.2rem, 1.4vw, 1.5rem)',
+    fontWeight: 900,
+    letterSpacing: '-0.01em',
+    color: '#FF3B30',
+    lineHeight: 1
+  },
+  brandTagline: {
+    fontFamily: 'var(--font-sans)',
+    fontSize: 'clamp(0.56rem, 0.62vw, 0.68rem)',
+    fontWeight: 700,
+    letterSpacing: 'clamp(1.8px, 0.18vw, 2.8px)',
+    color: '#94A3B8',
+    textTransform: 'uppercase',
+    marginTop: '3px',
+    lineHeight: 1,
+    whiteSpace: 'nowrap'
   },
   navMenu: {
     display: 'flex',
     alignItems: 'center',
-    gap: '22px',
+    gap: 'clamp(18px, 1.8vw, 32px)',
     listStyle: 'none'
   },
   navLink: {
-    fontSize: '0.88rem',
+    fontSize: 'clamp(0.88rem, 0.92vw, 1rem)',
     fontWeight: 600,
     color: 'var(--text-body)',
     padding: '6px 4px',
@@ -355,7 +417,7 @@ const styles = {
     gap: '5px',
     background: 'transparent',
     border: 'none',
-    fontSize: '0.88rem',
+    fontSize: 'clamp(0.88rem, 0.92vw, 1rem)',
     fontWeight: 600,
     cursor: 'pointer',
     padding: '6px 4px',
@@ -366,7 +428,7 @@ const styles = {
     top: 'calc(100% + 12px)',
     left: '50%',
     transform: 'translateX(-50%)',
-    width: '210px',
+    width: '220px',
     background: '#FFFFFF',
     borderRadius: '16px',
     boxShadow: '0 16px 36px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08)',
@@ -391,7 +453,7 @@ const styles = {
   actions: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px'
+    gap: '12px'
   },
   mobileToggle: {
     display: 'none',

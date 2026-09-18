@@ -113,120 +113,122 @@ export function LimitationSection() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .limitation-section {
-          padding-top: 14px;
-          padding-bottom: 20px;
+          padding-top: clamp(10px, 1.5vh, 24px);
+          padding-bottom: clamp(14px, 2vh, 28px);
         }
 
         /* Clean transparent container - with comfortable spacing */
         .scope-arc-container {
           display: grid;
-          grid-template-columns: 280px 1fr;
-          gap: 32px;
+          grid-template-columns: clamp(280px, 22vw, 360px) 1fr;
+          gap: clamp(28px, 3vw, 56px);
           align-items: center;
-          margin-top: 10px;
+          margin-top: clamp(8px, 1.2vh, 18px);
           background: transparent;
           border: none;
-          padding: 14px 18px;
+          padding: clamp(10px, 1vh, 18px) clamp(12px, 1.2vw, 24px);
           position: relative;
+          width: 100%;
         }
 
         /* Left Column: Perfectly Concentric Orbit Dial */
         .scope-hub-col {
           display: flex;
           align-items: center;
-          justifyContent: center;
+          justify-content: center;
         }
 
         .tech-orbital-dial {
           position: relative;
-          width: 240px;
-          height: 240px;
+          width: clamp(240px, 18vw, 310px);
+          height: clamp(240px, 18vw, 310px);
         }
 
         .orbit-ring-outer {
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 236px;
-          height: 236px;
-          margin-top: -118px;
-          margin-left: -118px;
+          width: clamp(236px, 17.6vw, 305px);
+          height: clamp(236px, 17.6vw, 305px);
           border-radius: 50%;
-          border: 1.5px solid rgba(239, 68, 68, 0.4);
-          animation: spinSlow 30s linear infinite;
-          pointer-events: none;
+          border: 2px dashed rgba(220, 38, 38, 0.45);
+          transform: translate(-50%, -50%);
+          animation: dialSpinSlow 45s linear infinite;
         }
 
         .orbit-ring-mid {
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 198px;
-          height: 198px;
-          margin-top: -99px;
-          margin-left: -99px;
+          width: clamp(186px, 14vw, 240px);
+          height: clamp(186px, 14vw, 240px);
           border-radius: 50%;
-          border-top: 2.5px solid #EF4444;
-          border-right: 2.5px solid transparent;
-          border-bottom: 1.5px dashed rgba(239, 68, 68, 0.35);
-          border-left: 1.5px dashed rgba(239, 68, 68, 0.35);
-          animation: spinReverse 20s linear infinite;
-          pointer-events: none;
-        }
-
-        @keyframes spinSlow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        @keyframes spinReverse {
-          from { transform: rotate(360deg); }
-          to { transform: rotate(0deg); }
+          border: 1.5px solid rgba(220, 38, 38, 0.2);
+          transform: translate(-50%, -50%);
         }
 
         .orbit-dots-layer {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 50%;
+          left: 50%;
+          width: clamp(236px, 17.6vw, 305px);
+          height: clamp(236px, 17.6vw, 305px);
+          transform: translate(-50%, -50%);
+          animation: dialSpinReverse 30s linear infinite;
           pointer-events: none;
         }
 
         .orbit-dot {
           position: absolute;
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
-          background: #EF4444;
-          box-shadow: 0 0 8px rgba(239, 68, 68, 0.9);
-          z-index: 3;
+          background: #DC2626;
+          box-shadow: 0 0 6px rgba(220, 38, 38, 0.8);
         }
 
-        .dot-1 { width: 7px; height: 7px; top: 12px; left: 50%; margin-left: -3.5px; }
-        .dot-2 { width: 8px; height: 8px; bottom: 22px; left: 40px; }
-        .dot-3 { width: 6px; height: 6px; top: 50%; right: 4px; margin-top: -3px; }
-        .dot-4 { width: 8px; height: 8px; bottom: 58px; right: 20px; background: #FF6B81; }
-        .dot-5 { width: 6px; height: 6px; top: 38px; right: 48px; }
+        .orbit-dot.dot-1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
+        .orbit-dot.dot-2 { top: 50%; right: 0; transform: translate(50%, -50%); }
+        .orbit-dot.dot-3 { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+        .orbit-dot.dot-4 { top: 50%; left: 0; transform: translate(-50%, -50%); }
+        .orbit-dot.dot-5 { top: 15%; right: 15%; transform: translate(50%, -50%); }
 
-        /* Central DUDI Red Circle Centered Concentrically & Vertically */
+        @keyframes dialSpinSlow {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes dialSpinReverse {
+          from { transform: translate(-50%, -50%) rotate(360deg); }
+          to { transform: translate(-50%, -50%) rotate(0deg); }
+        }
+
+        /* Central DUDI Red Disc */
         .hub-center-disc {
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 154px;
-          height: 154px;
           transform: translate(-50%, -50%);
+          width: clamp(138px, 10.5vw, 176px);
+          height: clamp(138px, 10.5vw, 176px);
           border-radius: 50%;
-          background: linear-gradient(145deg, #FF2D55 0%, #E11D48 55%, #B91C1C 100%);
-          border: 3.5px solid #ffffff;
-          box-shadow: 0 10px 30px rgba(239, 68, 68, 0.45), 0 0 15px rgba(239, 68, 68, 0.25);
+          background: linear-gradient(135deg, #FF3B30 0%, #E52E2E 50%, #991B1B 100%);
+          border: 3px solid rgba(255, 255, 255, 0.92);
+          box-shadow: 0 10px 30px rgba(229, 46, 46, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.35);
           display: flex;
           align-items: center;
-          justifyContent: center;
+          justify-content: center;
           text-align: center;
           z-index: 4;
           padding: 0;
           margin: 0;
           box-sizing: border-box;
+          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+        }
+
+        .tech-orbital-dial:hover .hub-center-disc {
+          transform: translate(-50%, -50%) scale(1.04);
+          box-shadow: 0 14px 36px rgba(229, 46, 46, 0.58), inset 0 2px 10px rgba(255, 255, 255, 0.45);
         }
 
         .hub-content-inner {

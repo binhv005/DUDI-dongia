@@ -1,30 +1,60 @@
 export const audiencesData = [
   {
     id: "agency",
-    title: "Agency Sáng Tạo & Tech",
-    tagline: "Bổ sung Dev, UI/UX & PM tức thì",
-    description: "Giải tỏa backlog dồn dập cho nhiều dự án mà không cần tăng nhân sự cố định.",
-    recommendedModel: "Theo giờ hoặc theo sprint dự án",
+    badge: "AGENCY",
+    title: "Agency & Tech",
+    tagline: "Bổ sung Dev, UI/UX tức thì",
+    description: "",
+    recommendedModel: "Theo giờ hoặc sprint dự án",
     icon: "agency",
-    image: "/images/audience-agency.webp"
+    features: [
+      "Bổ sung Senior Dev theo giờ hoặc Sprint",
+      "Kèm Designer UI/UX & PM điều phối",
+      "Minh bạch timesheet, bảo mật 100%"
+    ],
+    detailedSpecs: [
+      { label: "Mô hình", value: "Theo giờ / Sprint 2 tuần" },
+      { label: "Bàn giao", value: "Mã nguồn sạch, Figma, Git" },
+      { label: "Khởi động", value: "Sẵn sàng trong 24h - 48h" }
+    ]
   },
   {
     id: "enterprise",
-    title: "Doanh Nghiệp Đang Vận Hành",
-    tagline: "Xử lý backlog linh hoạt theo thực tế",
-    description: "Triển khai tính năng và bảo trì liên tục, minh bạch chi phí theo giờ thực tế.",
+    badge: "DOANH NGHIỆP",
+    title: "Doanh Nghiệp Vận Hành",
+    tagline: "Xử lý backlog linh hoạt",
+    description: "",
     recommendedModel: "Theo giờ và timesheet thực tế",
     icon: "enterprise",
-    image: "/images/audience-enterprise.webp"
+    features: [
+      "Phát triển tính năng & bảo trì liên tục",
+      "Chỉ thanh toán theo số giờ thực tế",
+      "Báo cáo tiến độ & nghiệm thu từng mốc"
+    ],
+    detailedSpecs: [
+      { label: "Mô hình", value: "Timesheet theo đầu việc" },
+      { label: "Bàn giao", value: "Module hoàn chỉnh & Báo cáo test" },
+      { label: "Khởi động", value: "Ngay sau khi duyệt backlog" }
+    ]
   },
   {
     id: "whitelabel",
-    title: "Đối Tác Hợp Tác White Label",
-    tagline: "Đội kỹ thuật chuyên trách phía sau",
-    description: "Bàn giao trọn vẹn mã nguồn, bảo mật danh tính dưới thương hiệu riêng của bạn.",
+    badge: "ẨN DANH",
+    title: "White Label (Ẩn Danh)",
+    tagline: "Đội ngũ kỹ thuật đứng sau",
+    description: "",
     recommendedModel: "Theo nhóm hoặc trọn gói backlog",
     icon: "whitelabel",
-    image: "/images/audience-whitelabel.webp"
+    features: [
+      "Đội ngũ kỹ thuật ẩn danh dưới tên bạn",
+      "Cam kết bảo mật thỏa thuận NDA 100%",
+      "Chuyển giao toàn quyền sở hữu mã nguồn"
+    ],
+    detailedSpecs: [
+      { label: "Mô hình", value: "Đội ngũ chuyên trách / Trọn gói" },
+      { label: "Bàn giao", value: "Toàn bộ Source Code & Tài liệu" },
+      { label: "Khởi động", value: "Theo lịch trình của đối tác" }
+    ]
   }
 ];
 

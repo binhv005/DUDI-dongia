@@ -105,14 +105,14 @@
    ROLE CARD HOVER EFFECTS
    ========================================================================== */
 .pricing-role-card {
-  width: 260px !important;
-  min-width: 260px !important;
-  max-width: 260px !important;
+  width: clamp(270px, 19vw, 340px) !important;
+  min-width: clamp(270px, 19vw, 340px) !important;
+  max-width: clamp(270px, 19vw, 340px) !important;
   flex-shrink: 0 !important;
   background: #FFFFFF;
   border-radius: var(--radius-lg);
   border: 1.5px solid var(--border-glass);
-  padding: 20px 16px 16px 16px;
+  padding: clamp(18px, 2.2vh, 28px) clamp(16px, 1.4vw, 24px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -207,11 +207,11 @@
    ========================================================================== */
 .output-concept-layout {
   display: grid;
-  grid-template-columns: 370px 1fr;
-  gap: 20px;
+  grid-template-columns: clamp(380px, 28vw, 480px) 1fr;
+  gap: clamp(24px, 2.5vw, 44px);
   align-items: stretch;
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -219,7 +219,7 @@
   background: #FFFFFF;
   border: 1.5px solid rgba(229, 46, 46, 0.18);
   border-radius: 120px 24px 24px 120px;
-  padding: 24px 22px 20px 36px;
+  padding: clamp(22px, 2.5vh, 34px) clamp(22px, 2vw, 32px) clamp(20px, 2vh, 28px) clamp(30px, 2.8vw, 44px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -242,8 +242,8 @@
 }
 
 .deco-dot {
-  width: 14px;
-  height: 14px;
+  width: clamp(12px, 1vw, 16px);
+  height: clamp(12px, 1vw, 16px);
   border-radius: 50%;
   display: inline-block;
 }
@@ -264,31 +264,31 @@
 }
 
 .output-arch-title {
-  font-size: 1.15rem;
+  font-size: clamp(1.15rem, 1.35vw, 1.45rem);
   font-weight: 800;
   color: var(--text-pure);
   margin-bottom: 2px;
 }
 
 .output-arch-subtitle {
-  font-size: 0.78rem;
+  font-size: clamp(0.78rem, 0.85vw, 0.92rem);
   color: var(--text-muted);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .output-checklist-wrap {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: clamp(8px, 1vh, 12px);
   margin: 10px 0 16px 0;
 }
 
 .output-check-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border-radius: 8px;
+  gap: 10px;
+  padding: clamp(6px, 0.8vh, 10px) clamp(10px, 1vw, 14px);
+  border-radius: 10px;
   background: #F8FAFC;
   border: 1px solid #E2E8F0;
   transition: all 0.2s ease;
@@ -300,8 +300,8 @@
 }
 
 .check-icon-badge {
-  width: 20px;
-  height: 20px;
+  width: clamp(20px, 1.5vw, 26px);
+  height: clamp(20px, 1.5vw, 26px);
   border-radius: 50%;
   background: rgba(229, 46, 46, 0.1);
   color: var(--dudi-red-bright);
@@ -312,23 +312,23 @@
 }
 
 .check-item-text {
-  font-size: 0.78rem;
+  font-size: clamp(0.78rem, 0.88vw, 0.94rem);
   font-weight: 600;
   color: var(--text-pure);
 }
 
 .output-rule-box {
   background: #FFF5F5;
-  border-left: 3.5px solid var(--dudi-red-bright);
-  border-radius: 8px;
-  padding: 9px 12px;
+  border-left: 4px solid var(--dudi-red-bright);
+  border-radius: 10px;
+  padding: clamp(10px, 1.2vh, 15px) clamp(12px, 1.2vw, 18px);
   border-top: 1px solid rgba(229, 46, 46, 0.12);
   border-right: 1px solid rgba(229, 46, 46, 0.12);
   border-bottom: 1px solid rgba(229, 46, 46, 0.12);
 }
 
 .output-rule-badge {
-  font-size: 0.72rem;
+  font-size: clamp(0.72rem, 0.8vw, 0.84rem);
   font-weight: 800;
   color: #DC2626;
   text-transform: uppercase;
@@ -337,7 +337,7 @@
 }
 
 .output-rule-desc {
-  font-size: 0.75rem;
+  font-size: clamp(0.75rem, 0.84vw, 0.9rem);
   color: #475569;
   line-height: 1.45;
   margin: 0;
@@ -346,14 +346,14 @@
 .output-bars-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: clamp(12px, 1.5vh, 20px);
   justify-content: space-between;
 }
 
 .output-model-bar {
   display: flex;
   align-items: stretch;
-  border-radius: 16px;
+  border-radius: clamp(16px, 1.5vw, 22px);
   overflow: hidden;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -384,14 +384,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 95px;
-  min-width: 95px;
+  width: clamp(95px, 8vw, 130px);
+  min-width: clamp(95px, 8vw, 130px);
   background: rgba(0, 0, 0, 0.12);
   border-right: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .model-bar-num {
-  font-size: 2.6rem;
+  font-size: clamp(2.6rem, 3.4vw, 3.8rem);
   font-weight: 900;
   letter-spacing: -0.04em;
   color: #FFFFFF;
@@ -401,22 +401,22 @@
 
 .model-bar-content {
   flex: 1;
-  padding: 14px 18px;
+  padding: clamp(14px, 1.8vh, 22px) clamp(18px, 1.8vw, 28px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
+  gap: clamp(6px, 0.8vh, 10px);
 }
 
 .model-bar-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
 }
 
 .model-bar-title {
-  font-size: 1.12rem;
+  font-size: clamp(1.12rem, 1.35vw, 1.45rem);
   font-weight: 800;
   letter-spacing: -0.01em;
   color: #FFFFFF;
@@ -424,11 +424,11 @@
 }
 
 .model-bar-badge {
-  font-size: 0.72rem;
+  font-size: clamp(0.72rem, 0.8vw, 0.86rem);
   font-weight: 700;
   background: rgba(255, 255, 255, 0.22);
   border: 1px solid rgba(255, 255, 255, 0.35);
-  padding: 2px 9px;
+  padding: clamp(2px, 0.4vh, 5px) clamp(9px, 0.8vw, 14px);
   border-radius: 9999px;
   backdrop-filter: blur(4px);
   color: #FFFFFF;
@@ -438,18 +438,18 @@
 .model-bar-details {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  font-size: 0.78rem;
+  gap: clamp(10px, 1.2vw, 18px);
+  font-size: clamp(0.78rem, 0.88vw, 0.94rem);
 }
 
 .model-detail-item {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 
 .model-detail-label {
-  font-size: 0.68rem;
+  font-size: clamp(0.68rem, 0.76vw, 0.82rem);
   opacity: 0.82;
   font-weight: 700;
   text-transform: uppercase;
@@ -460,7 +460,7 @@
   font-weight: 600;
   opacity: 0.96;
   line-height: 1.35;
-  font-size: 0.78rem;
+  font-size: clamp(0.78rem, 0.88vw, 0.94rem);
 }
 
 @media (max-width: 960px) {
