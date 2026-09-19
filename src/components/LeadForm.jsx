@@ -50,7 +50,7 @@ export function LeadForm({ selectedRole, onSelectRole }) {
     });
   };
 
-  const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
     e.preventDefault();
 
     // Anti-spam check (minimum 2.5 seconds)
@@ -116,7 +116,52 @@ export function LeadForm({ selectedRole, onSelectRole }) {
       .map(([key]) => roleMap[key] || key)
       .join(', ') || 'Chưa chọn vai trò';
 
+    const requirementsText = "Vai trò: " + selectedRolesText + " | Tech: " + (formData.techStack || "Không yêu cầu") + " | Bắt đầu: " + (formData.startDate || "Sớm") + " | Backlog: " + formData.backlog.trim();
+
+    // =========================================================================
+    // ⚡ 1. GỬI TRỰC TIẾP VÀO FIREBASE (HIỂN THỊ NGAY TRÊN DASHBOARD VERCEL)
+    // =========================================================================
+    const FIREBASE_PROJECT_ID = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_FIREBASE_PROJECT_ID) || 'dudi-leads';
+    const FIREBASE_API_KEY = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_FIREBASE_API_KEY) || 'AIzaSyBv2l4OH6dtaBqCx5D_rxtDT2HkMPfZ3kA';
+
+    const fbLeadId = 'DUDI-' + Math.floor(100000 + Math.random() * 900000);
+    const fbCreatedAt = new Date().toISOString();
+
+    try {
+      const fbUrl = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents/leads/${fbLeadId}?key=${FIREBASE_API_KEY}`;
+      
+      const fbPayload = {
+        fields: {
+          id: { stringValue: fbLeadId },
+          customerName: { stringValue: formData.fullname.trim() },
+          phone: { stringValue: formData.phone.trim() },
+          email: { stringValue: 'Chưa cung cấp' },
+          company: { stringValue: formData.company.trim() },
+          serviceId: { stringValue: 'dudi-dongia' },
+          serviceName: { stringValue: 'Bảng Đơn Giá & Thuê Kỹ Sư' },
+          budget: { stringValue: formData.estimatedHours ? (formData.estimatedHours + " giờ") : "Thỏa thuận" },
+          source: { stringValue: 'Website Bảng Đơn Giá' },
+          sourceUrl: { stringValue: typeof window !== 'undefined' ? window.location.href : 'https://dudi-dongia.vercel.app' },
+          status: { stringValue: 'new' },
+          priority: { stringValue: 'high' },
+          createdAt: { stringValue: fbCreatedAt },
+          requirements: { stringValue: requirementsText }
+        }
+      };
+
+      fetch(fbUrl, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fbPayload)
+      }).then(res => {
+        console.log('🔥 [Firebase Live] Lead synced to Dashboard:', fbLeadId, res.status);
+      }).catch(err => console.warn('Firebase sync warning:', err));
+    } catch (fbErr) {
+      console.warn('Firebase error:', fbErr);
+    }
+
     const payload = {
+      lead_id: fbLeadId,
       fullname: formData.fullname.trim(),
       company: formData.company.trim(),
       phone: formData.phone.trim(),
@@ -124,7 +169,8 @@ export function LeadForm({ selectedRole, onSelectRole }) {
       estimatedHours: formData.estimatedHours,
       startDate: formData.startDate || 'Càng sớm càng tốt',
       roles: selectedRolesText,
-      backlog: formData.backlog.trim()
+      backlog: formData.backlog.trim(),
+      timestamp: fbCreatedAt
     };
 
     const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
